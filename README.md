@@ -8,10 +8,15 @@
 
 <p align="center">
 	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/ken0by/minishell?color=lightblue" />
-	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/ken0by/minishell?color=critical" />
-	<img alt="Code language count" src="https://img.shields.io/github/languages/count/ken0by/minishell?color=yellow" />
 	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/ken0by/minishell?color=blue" />
-	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ken0by/minishell?color=green" />
 </p>
-
-El objetivo de este proyecto es crear un sencillo shell.
+<div>
+El objetivo de este proyecto es crear un sencillo shell: </br>
+	- Capaz de manejar N pipes, redirecciones a stdin y stdout (incluido el modo de append >>) y heredocs (<< EOF). </br>
+	- Manejo de errores (mensajes y códigos de error $?). </br>
+	- Analizando comillas cerradas simples y dobles como lo hace bash. </br>
+	- Set, unset y expand variables de entorno. </br>
+	- Ejecute comandos tanto con rutas relativas y rutas absolutas. </br>
+	- Funciones de bash recreadas: echo, cd, env, export, unset y exit. </br>
+	- Manejo de señales (Ctrl-C, Ctrl-D).
+</div>
