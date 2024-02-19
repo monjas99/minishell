@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 12:18:39 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/14 15:07:51 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:44:26 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,21 @@ static int	ft_count(char *cmd, char c)
 	return (count);
 }
 
+static void	ft_del_node(t_command *cmd)
+{
+
+	/* if (cmd->next->next)
+		aux = cmd->next->next; */
+	if (cmd)
+	{
+		free (cmd->next->command);
+		free(cmd->next);
+		cmd->next = NULL;
+		free (cmd->command);
+		free(cmd);
+	}
+}
+
 void	ft_inout(t_command **cmd, t_minishell *shell)
 {
 	t_command	*aux;
@@ -110,16 +125,23 @@ void	ft_inout(t_command **cmd, t_minishell *shell)
 	aux = *cmd;
 	while (aux)
 	{
-		if (ft_strchr(aux->command, '<'))
+		if (ft_strchr(aux->command, '<') && aux->dollar == 0)
 		{
 			aux->inf = ft_count(aux->command, '<');
 			shell->infile = ft_inf(aux->next->command, aux->inf, shell);
+			*cmd = aux->next->next;
+		ft_del_node(aux);
 		}
-		if (ft_strchr(aux->command, '>'))
+		else if (ft_strchr(aux->command, '>') && aux->dollar == 0)
 		{
 			aux->out = ft_count(aux->command, '>');
 			shell->outfile = ft_open(aux->next->command, aux->out, shell);
+			/* if (aux->next->next)
+				aux = aux->next->next; */
+			ft_del_node(aux);
+			break ;
 		}
-		aux = aux->next;
+		else
+			aux = aux->next;
 	}
 }

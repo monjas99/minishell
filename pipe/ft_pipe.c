@@ -6,7 +6,7 @@
 /*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:24:27 by rodro             #+#    #+#             */
-/*   Updated: 2024/02/13 17:34:15 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:00:59 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_dupfd2(int fdin, int fdout)
 		dup2(fdin, STDIN_FILENO);
 	if (fdout > 1)
 		dup2(fdout, STDOUT_FILENO);
-	close(fdin);
+	//close(fdin);
 }
 
 pid_t	ft_exec2(char **cmd, t_minishell *shell, int fdin, int fdout)
@@ -56,8 +56,7 @@ pid_t	ft_exec2(char **cmd, t_minishell *shell, int fdin, int fdout)
 		ft_free_mtx(cmd);
 		close(fdout);
 	}
-	else
-		close(fdout);
+	close(fdout);
 	return (pd);
 }
 
@@ -95,7 +94,7 @@ void	ft_ord(t_command *cmd, t_minishell *shell, int fdin, int fdout)
 	pid_t		*pd;
 	int			i;
 
-	pd = malloc(sizeof(pid_t) * ft_lst_size(cmd) + 1);
+	pd = ft_calloc((ft_lst_size(cmd) + 1), sizeof(pid_t));
 	aux = cmd;
 	i = 0;
 	while (aux)
@@ -111,7 +110,6 @@ void	ft_ord(t_command *cmd, t_minishell *shell, int fdin, int fdout)
 		fdin = fd[0];
 		aux = aux->next;
 	}
-	pd[i] = '\0';
 	g_code_error = (ft_cw2(pd) >> 8) & 0xFF;
 	close(fdin);
 	close(fdout);

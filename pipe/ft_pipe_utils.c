@@ -6,7 +6,7 @@
 /*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:05:35 by rodro             #+#    #+#             */
-/*   Updated: 2024/02/13 17:36:00 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:43:19 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int	ft_check_in(t_minishell *shell)
 {
 	if (shell->infile)
 		return (shell->infile);
-	return (-1);
+	return (0);
 }
 
 int	ft_check_out(t_minishell *shell)
 {
 	if (shell->outfile)
 		return (shell->outfile);
-	return (-1);
+	return (1);
 }
 
 int	ft_lst_size(t_command *lst)
@@ -61,8 +61,8 @@ int	ft_lst_size(t_command *lst)
 	i = 0;
 	while (aux)
 	{
-		aux = aux->next;
 		i++;
+		aux = aux->next;
 	}
 	return (i);
 }

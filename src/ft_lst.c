@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:25:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/01/29 15:32:33 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/02/19 12:58:03 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ t_command	*ft_lst_first(char *str, char c, int *space)
 	new->space = *space;
 	if (c == 39)
 		new->dollar = 1;
+	else if (c == 34)
+		new->dollar = 2;
 	else
 		new->dollar = 0;
+	free(str);
 	return (new);
 }
 

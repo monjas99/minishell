@@ -6,11 +6,27 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/14 15:06:33 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:28:34 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_pintar(t_command *cmd)
+{
+	t_command	*aux;
+	int	i;
+
+	i = 0;
+	aux = cmd;
+	while (aux)	
+	{
+		ft_printf("ccommand: %s\n", aux->command);
+		//ft_printf("infile: %s\n", aux->infile);
+		//ft_printf("outfile: %s\n", aux->outfile);
+		aux = aux->next;
+	}
+}
 
 void	ft_shell_up(t_minishell *shell)
 {
@@ -131,12 +147,10 @@ char	*ft_spr(char **line, char *built)
 {
 	int		i;
 	int		j;
-	int		k;
 	char	*word;
 
 	i = 0;
 	j = 0;
-	k = 0;
 	while (line[i])
 	{
 		if (ft_strncmp(line[i], built, ft_strlen(line[i])) == 0)
@@ -147,9 +161,11 @@ char	*ft_spr(char **line, char *built)
 				word[j] = line[i][j];
 				j++;
 			}
+			free(line);
 			return (word);
 		}
 		i++;
 	}
+	free(line);
 	return ("Error");
 }
