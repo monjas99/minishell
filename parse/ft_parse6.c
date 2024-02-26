@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse6.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 17:50:00 by rofuente          #+#    #+#             */
-/*   Updated: 2024/02/13 16:56:57 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:07:16 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,28 @@ static char	*ft_sjoin(char *s1, char *s2)
 	return (r);
 }
 
-void	ft_swap(t_command *cmd)
+char	*ft_swap(char *cmd, char *inf)
 {
 	char	**tmp;
-	char	*aux;
-	char	*aux2;
+	char	*command;
+	int		i;
 
-	tmp = ft_split(cmd->command, ' ');
-	if (open(tmp[0], O_RDONLY, 0644) < 0)
+	i = 1;
+	tmp = ft_split(cmd, ' ');
+	if (open(inf, O_RDONLY, 0644) < 0)
 	{
 		free (tmp);
-		return ;
+		return ("ERROR INF");
 	}
-	aux = tmp[0];
-	aux2 = tmp[1];
-	tmp[0] = aux2;
-	tmp[1] = aux;
-	free (cmd->command);
-	cmd->command = ft_sjoin(tmp[0], tmp[1]);
+	command = ft_strjoin(tmp[0], " ");
+	command = ft_strjoin(command, inf);
+	while (tmp[i])
+	{
+		command = ft_strjoin(command, tmp[i]);
+		i++;
+	}
 	ft_free_mtx(tmp);
+	return (command);
 }
 
 char	*ft_take_size(char *cmd)

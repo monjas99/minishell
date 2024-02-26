@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:25:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/19 12:58:03 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:14:53 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_command	*ft_lst_first(char *str, char c, int *space)
 		return (NULL);
 	new->command = ft_strdup(str);
 	new->built = NULL;
-	new->infile = NULL;
-	new->outfile = NULL;
+/* 	new->infile = NULL;
+	new->outfile = NULL; */
 	new->next = NULL;
 	new->inf = 0;
 	new->out = 0;
@@ -73,8 +73,8 @@ t_command	*ft_lstnew_shell(char *str)
 		return (NULL);
 	new->command = ft_strdup(str);
 	new->built = NULL;
-	new->infile = NULL;
-	new->outfile = NULL;
+/* 	new->infile = NULL;
+	new->outfile = NULL; */
 	new->inf = 0;
 	new->out = 0;
 	if (str[0] == 39)

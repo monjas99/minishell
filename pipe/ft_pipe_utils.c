@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:05:35 by rodro             #+#    #+#             */
-/*   Updated: 2024/02/15 15:43:19 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:15:16 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	ft_free_cmd(t_command **cmd)
 		aux = (*cmd)->next;
 		free(cmd[0]->command);
 		free(cmd[0]->built);
-		free(cmd[0]->infile);
-		free(cmd[0]->outfile);
+/* 		free(cmd[0]->infile);
+		free(cmd[0]->outfile); */
 		free (*cmd);
 		*cmd = aux;
 	}

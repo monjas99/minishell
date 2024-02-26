@@ -6,13 +6,13 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/19 15:28:34 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:49:09 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_pintar(t_command *cmd)
+ static void	ft_pintar(t_command *cmd)
 {
 	t_command	*aux;
 	int	i;
@@ -86,7 +86,7 @@ void	ft_shell_down(t_minishell *shell)
 	}
 }
 
-static t_command	*ft_join(t_command **cmd)
+t_command	*ft_join(t_command **cmd)
 {
 	t_command	**pipe;
 	t_command	*aux;
@@ -133,13 +133,13 @@ void	ft_check_line(t_command *cmd, t_minishell *shell)
 	if (!cmd)
 		return ;
 	cmd = ft_sust(&cmd, shell);
-	ft_inout(&cmd, shell);
-	cmd = ft_join(&cmd);
+	cmd = ft_inout(&cmd, shell);
+	//cmd = ft_join(&cmd);
 	ft_cmdtake(&cmd);
 	if (g_code_error != 0)
 		return ;
 	if (flag)
-		ft_swap(cmd);
+		cmd->command = ft_swap(cmd->command, shell->inf);
 	ft_system(cmd, shell, ft_check_in(shell), ft_check_out(shell));
 }
 

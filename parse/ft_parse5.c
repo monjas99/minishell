@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 12:18:39 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/19 15:44:26 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:54:01 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ char	*ft_take_com(char *command)
 	return (free (command), tmp);
 }
 
-static int	ft_open(char *outfile, int x, t_minishell *shell)
+static int	ft_open(char *outfile, char *command, t_minishell *shell)
 {
 	int	fd;
+	int	x;
 
 	fd = 0;
+	x = ft_count(command, '>');
 	if (shell->outfile)
 		close(shell->outfile);
 	if (x == 1)
@@ -88,7 +90,7 @@ static int	ft_open(char *outfile, int x, t_minishell *shell)
 	return (fd);
 }
 
-static int	ft_count(char *cmd, char c)
+int	ft_count(char *cmd, char c)
 {
 	int	i;
 	int	count;
@@ -103,22 +105,7 @@ static int	ft_count(char *cmd, char c)
 	return (count);
 }
 
-static void	ft_del_node(t_command *cmd)
-{
-
-	/* if (cmd->next->next)
-		aux = cmd->next->next; */
-	if (cmd)
-	{
-		free (cmd->next->command);
-		free(cmd->next);
-		cmd->next = NULL;
-		free (cmd->command);
-		free(cmd);
-	}
-}
-
-void	ft_inout(t_command **cmd, t_minishell *shell)
+t_command	*ft_inout(t_command **cmd, t_minishell *shell)
 {
 	t_command	*aux;
 
@@ -127,21 +114,22 @@ void	ft_inout(t_command **cmd, t_minishell *shell)
 	{
 		if (ft_strchr(aux->command, '<') && aux->dollar == 0)
 		{
-			aux->inf = ft_count(aux->command, '<');
-			shell->infile = ft_inf(aux->next->command, aux->inf, shell);
-			*cmd = aux->next->next;
-		ft_del_node(aux);
+			if (aux->next->next->command[0] == '<')
+				aux = ft_del_node(aux);
+			shell->inf = ft_strdup(aux->next->command);
+			shell->infile = ft_inf(aux->next->command, aux->command, shell);
+			*cmd = ft_del_node(aux);
+			aux = *cmd;
 		}
-		else if (ft_strchr(aux->command, '>') && aux->dollar == 0)
+		if (aux->next && (ft_strchr(aux->next->command, '>') && aux->next->dollar == 0))
 		{
-			aux->out = ft_count(aux->command, '>');
-			shell->outfile = ft_open(aux->next->command, aux->out, shell);
-			/* if (aux->next->next)
-				aux = aux->next->next; */
-			ft_del_node(aux);
+			//shell->out = ft_cp_out(aux->next);
+			shell->outfile = ft_open(aux->next->next->command, aux->next->command, shell);
+			aux->next = NULL;
 			break ;
 		}
-		else
-			aux = aux->next;
+		aux = aux->next; 
 	}
+	*cmd = ft_join(cmd);
+	return(*cmd);
 }

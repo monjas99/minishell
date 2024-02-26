@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rodro <rodro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:48:52 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/12 12:52:14 by rodro            ###   ########.fr       */
+/*   Updated: 2024/02/26 17:21:10 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,13 @@ static int	ft_here(char *end, int file, t_minishell *shell)
 	return (file);
 }
 
-int	ft_inf(char *infile, int x, t_minishell *shell)
+int	ft_inf(char *infile, char *command, t_minishell *shell)
 {
 	int	fd;
+	int	x;
 
 	fd = 0;
+	x = ft_count(command, '<');
 	if (shell->infile)
 		close(shell->infile);
 	if (x == 1)
