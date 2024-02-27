@@ -6,27 +6,11 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/26 17:49:09 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:52:06 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
- static void	ft_pintar(t_command *cmd)
-{
-	t_command	*aux;
-	int	i;
-
-	i = 0;
-	aux = cmd;
-	while (aux)	
-	{
-		ft_printf("ccommand: %s\n", aux->command);
-		//ft_printf("infile: %s\n", aux->infile);
-		//ft_printf("outfile: %s\n", aux->outfile);
-		aux = aux->next;
-	}
-}
 
 void	ft_shell_up(t_minishell *shell)
 {
@@ -86,7 +70,7 @@ void	ft_shell_down(t_minishell *shell)
 	}
 }
 
-t_command	*ft_join(t_command **cmd)
+static t_command	*ft_join(t_command **cmd)
 {
 	t_command	**pipe;
 	t_command	*aux;
@@ -134,38 +118,11 @@ void	ft_check_line(t_command *cmd, t_minishell *shell)
 		return ;
 	cmd = ft_sust(&cmd, shell);
 	cmd = ft_inout(&cmd, shell);
-	//cmd = ft_join(&cmd);
+	cmd = ft_join(&cmd);
 	ft_cmdtake(&cmd);
 	if (g_code_error != 0)
 		return ;
 	if (flag)
 		cmd->command = ft_swap(cmd->command, shell->inf);
 	ft_system(cmd, shell, ft_check_in(shell), ft_check_out(shell));
-}
-
-char	*ft_spr(char **line, char *built)
-{
-	int		i;
-	int		j;
-	char	*word;
-
-	i = 0;
-	j = 0;
-	while (line[i])
-	{
-		if (ft_strncmp(line[i], built, ft_strlen(line[i])) == 0)
-		{
-			word = malloc(sizeof(char) * ft_strlen(line[i]));
-			while (line[i][j])
-			{
-				word[j] = line[i][j];
-				j++;
-			}
-			free(line);
-			return (word);
-		}
-		i++;
-	}
-	free(line);
-	return ("Error");
 }

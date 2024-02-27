@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rodro <rodro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:31:43 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/12 12:47:56 by rodro            ###   ########.fr       */
+/*   Updated: 2024/02/27 11:11:06 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*ft_change(char *fir_line, char *sec_line, char *change, char **env)
 	return (line);
 }
 
-char	*ft_param(char *line, char **env)
+static char	*ft_param(char *line, char **env)
 {
 	int		i;
 	int		j;

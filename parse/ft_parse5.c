@@ -6,62 +6,73 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 12:18:39 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/26 17:54:01 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:54:39 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_built(char *cmd)
+static t_command	*ft_del_node(t_command *aux)
 {
-	if (ft_strnstr(cmd, "echo", ft_strlen(cmd))
-		&& ft_strlen(cmd) > 0)
-		return (ft_spr(ft_split(cmd, ' '), "echo"));
-	else if (ft_strnstr(cmd, "cd", ft_strlen(cmd))
-		&& ft_strlen(cmd) > 0)
-		return (ft_spr(ft_split(cmd, ' '), "cd"));
-	else if (ft_strnstr(cmd, "pwd", ft_strlen(cmd))
-		&& ft_strlen(cmd) > 0)
-		return (ft_spr(ft_split(cmd, ' '), "pwd"));
-	else if (ft_strnstr(cmd, "export", ft_strlen(cmd))
-		&& ft_strlen(cmd) > 0)
-		return (ft_spr(ft_split(cmd, ' '), "export"));
-	else if (ft_strnstr(cmd, "unset", ft_strlen(cmd))
-		&& ft_strlen(cmd) > 0)
-		return (ft_spr(ft_split(cmd, ' '), "unset"));
-	else if (ft_strnstr(cmd, "env", ft_strlen(cmd))
-		&& ft_strlen(cmd) > 0)
-		return (ft_spr(ft_split(cmd, ' '), "env"));
-	return ("exec");
+	t_command	*cmd;
+
+	cmd = aux;
+	if (aux->next->next)
+		cmd = aux->next->next;
+	else
+		cmd = NULL;
+	if (aux)
+	{
+		free (aux->next->command);
+		free(aux->next);
+		aux->next = NULL;
+		free (aux->command);
+		free(aux);
+	}
+	return (cmd);
 }
 
-char	*ft_take_com(char *command)
+static int	ft_count(char *cmd, char c)
 {
-	int		i;
-	int		j;
-	char	*tmp;
+	int	i;
+	int	count;
 
-	tmp = ft_take_size(command);
 	i = -1;
-	j = 0;
-	while (command[++i])
+	count = 0;
+	while (cmd[++i])
 	{
-		if (command[i] == '>')
-			break ;
-		if (command[i] == '<')
-		{
-			i++;
-			while (command[i] == ' ' && command[i + 1] == ' ')
-				i++;
-		}
-		else
-		{
-			tmp[j] = command[i];
-			j++;
-		}
+		if (cmd[i] == c)
+			count++;
 	}
-	tmp[j] = '\0';
-	return (free (command), tmp);
+	return (count);
+}
+
+static int	ft_inf(char *infile, char *command, t_minishell *shell)
+{
+	int	fd;
+	int	x;
+
+	fd = 0;
+	x = ft_count(command, '<');
+	if (shell->infile)
+		close(shell->infile);
+	if (x == 1)
+	{
+		fd = open(infile, O_RDONLY, 0644);
+		if (fd > 0 && access(infile, R_OK) < 0)
+			return (ft_err_msg("Error opening infile"), 0);
+	}
+	if (x == 2)
+	{
+		fd = open(infile, O_RDWR | O_CREAT | O_APPEND, 0644);
+		if (fd > 0 && access(infile, W_OK | R_OK) < 0)
+			return (ft_err_msg("Error opening heredoc"), 0);
+		shell->heredoc = 1;
+		shell->infile = ft_here(infile, fd, shell);
+	}
+	if (fd < 0)
+		return (ft_err_msg("No such file or directory"), 0);
+	return (fd);
 }
 
 static int	ft_open(char *outfile, char *command, t_minishell *shell)
@@ -90,20 +101,6 @@ static int	ft_open(char *outfile, char *command, t_minishell *shell)
 	return (fd);
 }
 
-int	ft_count(char *cmd, char c)
-{
-	int	i;
-	int	count;
-
-	i = -1;
-	count = 0;
-	while (cmd[++i])
-	{
-		if (cmd[i] == c)
-			count++;
-	}
-	return (count);
-}
 
 t_command	*ft_inout(t_command **cmd, t_minishell *shell)
 {
@@ -130,6 +127,36 @@ t_command	*ft_inout(t_command **cmd, t_minishell *shell)
 		}
 		aux = aux->next; 
 	}
-	*cmd = ft_join(cmd);
 	return(*cmd);
 }
+/*
+static void	ft_lstclear_shell(t_command **lst)
+{
+	t_command	*aux;
+	t_command	*aux_next;
+
+	aux = *lst;
+	while (aux)
+	{
+		aux_next = aux->next;
+		free(aux);
+		aux = aux_next;
+	}
+	*lst = NULL;
+}
+
+ char	*ft_cp_out(t_command *aux)
+{
+	char		*out;
+	t_command	*aux2;
+
+	aux2 = aux;
+	aux = aux->next;
+	while (aux)
+	{
+		out = ft_strjoin(out, aux->command);
+		aux = aux->next;
+	}
+	ft_lstclear_shell(&aux2);
+	return (out);
+} */
