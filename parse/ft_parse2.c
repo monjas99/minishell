@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:12:11 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/15 14:28:34 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:48:24 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,5 @@ t_command	*ft_take_cmd(t_command **cmd, char *line, char *cmd_line)
 				ft_lst_first(ft_skip_space(line), cmd_line[i], &space));
 		}
 	}
-	return (*cmd);
+	return (ft_comp_list(*cmd));
 }

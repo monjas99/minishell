@@ -6,7 +6,7 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:44:42 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/28 14:57:02 by david            ###   ########.fr       */
+/*   Updated: 2024/02/28 18:48:58 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_minishell
 	char	*root;
 	char	**env;
 	char	*inf;
+	char	*here;
+	char	**del;
 }	t_minishell;
 
 typedef struct s_command
@@ -119,6 +121,7 @@ t_command	*ft_sust(t_command **cmd, t_minishell *shell);
 
 /* FT_PARSE4.C */
 char		*ft_sust_doll(char *line, t_minishell *shell);
+t_command	*ft_comp_list(t_command	*cmd);
 
 /* FT_PARSE5.C */
 t_command	*ft_inout(t_command **cmd, t_minishell *shell);
@@ -137,6 +140,9 @@ void		ft_cmdtake(t_command **cmd);
 
 /* FT_PARSE9.C */
 t_command	*ft_out_chech(t_command *cmd);
+t_command	*ft_del_node(t_command *aux);
+char		**ft_take_one(char **cmd);
+void		ft_unlink(char **cmd);
 
 /* FT_PARSE_ERROR.C */
 void		ft_error_car(void);
@@ -158,6 +164,7 @@ int			ft_lst_size(t_command *lst);
 
 /* FT_PIPE_UTILS2.C */
 pid_t		ft_order_single(char *cmd, t_minishell *shell, int fdin, int fdout);
+void		ft_close(int fd1, int fd2);
 
 /* ----- SRC ----- */
 /* FT_UTILS.C */

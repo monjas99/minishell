@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:31:09 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/28 14:51:44 by david            ###   ########.fr       */
+/*   Updated: 2024/02/28 18:03:02 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ static void	ft_init_var(t_minishell *shell, char **env)
 	shell->heredoc = 0;
 	shell->last_error = 0;
 	shell->cmd_line = NULL;
-	shell->inf = NULL;
+	shell->here = NULL;
+	shell->del = NULL;
 	if (!env[0])
 	{
+		shell->pwd = NULL;
+		shell->oldpwd = NULL;
 		ft_cpy_no_env(shell);
 		shell->pwd = ft_env(shell->env, "PWD=");
 	}

@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:48:52 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/27 10:38:13 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:48:45 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_command	*ft_comp_list(t_command	*cmd)
+{
+	if (ft_lst_size(cmd) == 1)
+	{
+		if (ft_strchr(cmd->command, '<'))
+			return (ft_printf("syntax error near unexpected token `newline'\n") ,NULL);
+		else if (ft_strchr(cmd->command, '>'))
+			return (ft_printf("syntax error near unexpected token `newline'\n"), NULL);
+		else if (ft_strchr(cmd->command, '|'))
+			return (ft_printf("syntax error near unexpected token `|'\n"), NULL);
+	}
+	return (cmd);
+}
 
 static char	*ft_change_doll(char *fir_line, char *sec_line, t_minishell *shell)
 {
