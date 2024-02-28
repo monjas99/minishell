@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse8.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rodro <rodro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:24:53 by rofuente          #+#    #+#             */
-/*   Updated: 2024/02/27 11:12:48 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:54:45 by rodro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,12 @@ static char	*ft_built(char *cmd)
 	else if (ft_strnstr(cmd, "env", ft_strlen(cmd))
 		&& ft_strlen(cmd) > 0)
 		return (ft_spr(ft_split(cmd, ' '), "env"));
+	else if (ft_strnstr(cmd, "exit", ft_strlen(cmd))
+		&& ft_strlen(cmd) > 0)
+		return (ft_spr(ft_split(cmd, ' '), "exit"));
+	else if (ft_strnstr(cmd, "./minishell", ft_strlen(cmd))
+		&& ft_strlen(cmd) > 0)
+		return (ft_spr(ft_split(cmd, ' '), "./minishell"));
 	return ("exec");
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:44:42 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/27 11:14:04 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:57:02 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_minishell
 	char	*root;
 	char	**env;
 	char	*inf;
-	//char	*out;
 }	t_minishell;
 
 typedef struct s_command
@@ -137,6 +136,7 @@ char		*ft_swap(char *cmd, char *inf);
 void		ft_cmdtake(t_command **cmd);
 
 /* FT_PARSE9.C */
+t_command	*ft_out_chech(t_command *cmd);
 
 /* FT_PARSE_ERROR.C */
 void		ft_error_car(void);
@@ -155,6 +155,9 @@ int			ft_check_out(t_minishell *shell);
 void		ft_free_cmd(t_command **cmd);
 void		ft_peror(char *var, char *s);
 int			ft_lst_size(t_command *lst);
+
+/* FT_PIPE_UTILS2.C */
+pid_t		ft_order_single(char *cmd, t_minishell *shell, int fdin, int fdout);
 
 /* ----- SRC ----- */
 /* FT_UTILS.C */
@@ -189,6 +192,7 @@ t_command	*ft_lst_first(char *str, char c, int *space);
 
 /* FT_SIGNAL.C */
 void		ft_int(int i);
+void		ft_intnl(int i);
 void		ft_quit(int sig);
 void		ft_init_signal(void);
 void		ft_signal_dis(void);
@@ -197,6 +201,7 @@ void		ft_signal_dis(void);
 void		ft_system(t_command *cmd, t_minishell *shell, int fdin, int fdout);
 void		ft_exec(char **cmd, t_minishell *shell, int fdin, int fdout);
 char		*ft_cmdpath(char *cmd, char **env);
+void		ft_dupfd(int fdin, int fdout);
 int			ft_cw(int fdout, pid_t pd);
 
 /* FT_PATH.C */

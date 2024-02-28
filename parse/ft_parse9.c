@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse9.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 17:50:00 by rofuente          #+#    #+#             */
-/*   Updated: 2024/02/27 11:07:46 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:11:44 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+t_command	*ft_out_chech(t_command *cmd)
+{
+	if (ft_strchr(cmd->command, '>'))
+		cmd = cmd->next;
+	if (ft_strchr(cmd->command, '>'))
+		cmd = cmd->next;
+	if (cmd->next != NULL)
+		return (cmd->next);	
+	return (NULL);
+}
 
 /* static char	*ft_sjoin(char *s1, char *s2)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:31:09 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/15 15:37:59 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:51:44 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 static void	ft_cpy_no_env(t_minishell *shell)
 {
-	shell->env = (char **)malloc(sizeof(char *) * (3));
+	shell->env = malloc(sizeof(char *) * 4);
 	shell->env[0] = ft_strjoin("PWD=", getcwd(shell->pwd, 100));
 	shell->env[1] = ft_strdup("SHLVL=1");
-	shell->env[2] = ft_strdup("_=");
+	shell->env[2] = ft_strdup("_=/usr/bin/env");
+	shell->env[3] = NULL;
 }
 
 static void	ft_init_var(t_minishell *shell, char **env)
@@ -28,6 +29,7 @@ static void	ft_init_var(t_minishell *shell, char **env)
 	shell->heredoc = 0;
 	shell->last_error = 0;
 	shell->cmd_line = NULL;
+	shell->inf = NULL;
 	if (!env[0])
 	{
 		ft_cpy_no_env(shell);
@@ -52,9 +54,10 @@ static void	ft_free_cmdline(char *line, t_command **cmd)
 	return ;
 }
 
-void leaks()
+static void	ft_sig_disable(void)
 {
-	system("leaks -q minishell");
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, ft_int);
 }
 
 int	main(int ac, char **av, char **env)
@@ -62,15 +65,14 @@ int	main(int ac, char **av, char **env)
 	t_minishell	shell;
 	t_command	*cmd;
 
-	//atexit (leaks);
 	if (ac != 1 || av[1])
 		ft_error_arguments();
 	ft_init_var(&shell, env);
+	ft_signal_dis();
 	cmd = NULL;
 	while (1)
 	{
-		ft_signal_dis();
-		signal(SIGINT, ft_int);
+		ft_sig_disable();
 		if (!g_code_error)
 			shell.cmd_line = readline(GREEN"Minishell  🤯 $ "RESET);
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/27 10:52:06 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:34:11 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	ft_check_line(t_command *cmd, t_minishell *shell)
 		return ;
 	if (cmd_line[0] == '<')
 		flag = 1;
+	signal(SIGINT, ft_intnl);
 	signal(SIGQUIT, ft_quit);
 	cmd = ft_take_cmd(&cmd, line, cmd_line);
 	if (!cmd)

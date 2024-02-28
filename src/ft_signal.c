@@ -6,7 +6,7 @@
 /*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:31:50 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/15 14:36:16 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:34:30 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@ void	ft_signal_dis(void)
 		perror("tcsetattr");
 		exit(0);
 	}
+}
+
+void	ft_intnl(int i)
+{
+	ft_printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", '\0');
+	(void)i;
 }
 
 void	ft_int(int i)

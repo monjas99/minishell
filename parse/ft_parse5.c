@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse5.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 12:18:39 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/27 10:54:39 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:21:40 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,21 +111,20 @@ t_command	*ft_inout(t_command **cmd, t_minishell *shell)
 	{
 		if (ft_strchr(aux->command, '<') && aux->dollar == 0)
 		{
-			if (aux->next->next->command[0] == '<')
-				aux = ft_del_node(aux);
+			if (shell->inf == NULL)
+				free (shell->inf);
 			shell->inf = ft_strdup(aux->next->command);
 			shell->infile = ft_inf(aux->next->command, aux->command, shell);
 			*cmd = ft_del_node(aux);
 			aux = *cmd;
 		}
-		if (aux->next && (ft_strchr(aux->next->command, '>') && aux->next->dollar == 0))
+		else if (aux->next && (ft_strchr(aux->next->command, '>') && aux->next->dollar == 0))
 		{
-			//shell->out = ft_cp_out(aux->next);
 			shell->outfile = ft_open(aux->next->next->command, aux->next->command, shell);
-			aux->next = NULL;
-			break ;
+			aux->next = ft_out_chech(aux->next);
 		}
-		aux = aux->next; 
+		else
+			aux = aux->next; 
 	}
 	return(*cmd);
 }
