@@ -6,7 +6,7 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:44:42 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/28 18:48:58 by david            ###   ########.fr       */
+/*   Updated: 2024/02/29 14:21:36 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ t_command	*ft_sust(t_command **cmd, t_minishell *shell);
 /* FT_PARSE4.C */
 char		*ft_sust_doll(char *line, t_minishell *shell);
 t_command	*ft_comp_list(t_command	*cmd);
+t_command	*ft_why(t_command *cmd, t_command **change);
 
 /* FT_PARSE5.C */
 t_command	*ft_inout(t_command **cmd, t_minishell *shell);

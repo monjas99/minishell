@@ -6,11 +6,25 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:48:52 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/28 18:48:45 by david            ###   ########.fr       */
+/*   Updated: 2024/02/29 14:21:23 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_command	*ft_why(t_command *cmd, t_command **change)
+{
+	t_command	*aux;
+	t_command	*aux_change;
+
+	aux = cmd;
+	aux_change = *change;
+	*change = aux_change->next;
+	while (cmd && (ft_strnstr(aux->next->command, "$", ft_strlen(aux->next->command)) == 0))
+		aux = aux->next;
+	aux->next = aux->next->next;
+	return (cmd);
+}
 
 t_command	*ft_comp_list(t_command	*cmd)
 {

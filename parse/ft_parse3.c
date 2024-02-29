@@ -6,7 +6,7 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:31:43 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/28 19:20:14 by david            ###   ########.fr       */
+/*   Updated: 2024/02/29 14:21:16 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,15 @@ t_command	*ft_sust(t_command **cmd, t_minishell *shell)
 			aux = aux->next;
 		else
 		{
-			if (ft_strnstr(aux->command, "$?", ft_strlen(aux->command)) != 0)
+			if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) != 0 &&
+				ft_strlen(aux->command) == 1 && (aux->space == 0 || (aux->space == 1 && aux->next == NULL)))
+				aux = aux->next;
+			else if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) != 0 &&
+				ft_strlen(aux->command) == 1 && aux->space == 1)
+				*cmd = ft_why(*cmd, &aux);
+			else if (ft_strnstr(aux->command, "$?", ft_strlen(aux->command)) != 0)
 				aux->command = ft_sust_doll(aux->command, shell);
-			if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) != 0)
+			else if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) != 0)
 				aux->command = ft_param(aux->command, shell->env);
 			if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) == 0)
 				aux = aux->next;
