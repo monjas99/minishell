@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:12:11 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/29 14:31:05 by david            ###   ########.fr       */
+/*   Updated: 2024/03/04 14:06:08 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ static int	ft_num(char *str, char **line, int *space)
 	j = 0;
 	while (str[i] && str[i] != ' ')
 	{
-		if (str[i] == '|' || str[i] == '"' || str[i] == 39
-			|| str[i] == '<' || str[i] == '>')
+		if (str[i] == '|' || str[i] == '"' || str[i] == 39)
 			break ;
 		i++;
 	}
@@ -108,6 +107,7 @@ static int	ft_car(char *str, char **line)
 	line[0][j] = '\0';
 	return (i - 1);
 }
+
 
 t_command	*ft_take_cmd(t_command **cmd, char *line, char *cmd_line)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/29 14:05:34 by david            ###   ########.fr       */
+/*   Updated: 2024/03/04 14:32:49 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,21 @@ static t_command	*ft_join(t_command **cmd)
 	//ft_free_cmd(cmd);
 	return (free(line), *pipe);
 }
+
+/* static void	ft_pintar(t_command *cmd)
+{
+	t_command	*aux;
+
+	aux = cmd;
+	while (aux)
+	{
+		ft_printf("Comando: %s\n", aux->command);
+		//ft_printf("Space: %d\n", aux->space);
+		//ft_printf();
+		//ft_printf(); 
+		aux = aux->next;
+	}
+} */
 
 void	ft_check_line(t_command *cmd, t_minishell *shell)
 {

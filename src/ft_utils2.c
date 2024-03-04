@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 08:24:23 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/29 14:05:22 by david            ###   ########.fr       */
+/*   Updated: 2024/02/28 17:55:39 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-/* static void	ft_pintar(t_command *cmd)
-{
-	t_command	*aux;
-
-	aux = cmd;
-	while (aux)
-	{
-		ft_printf("Comando: %s\n", aux->command);
-		ft_printf("Space: %d\n", aux->space);
-		//ft_printf();
-		//ft_printf(); 
-		aux = aux->next;
-	}
-} */
 
 int	ft_strchr_in(const char *s, int c)
 {

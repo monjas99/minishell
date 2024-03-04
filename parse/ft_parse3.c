@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:31:43 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/29 14:21:16 by david            ###   ########.fr       */
+/*   Updated: 2024/03/04 14:59:33 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*ft_change(char *fir_line, char *sec_line, char *change, char **env)
 	return (line);
 }
 
-static char	*ft_param(char *line, char **env)
+char	*ft_param(char *line, char **env)
 {
 	int		i;
 	int		j;
@@ -97,20 +97,7 @@ t_command	*ft_sust(t_command **cmd, t_minishell *shell)
 		if (aux->dollar == 1)
 			aux = aux->next;
 		else
-		{
-			if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) != 0 &&
-				ft_strlen(aux->command) == 1 && (aux->space == 0 || (aux->space == 1 && aux->next == NULL)))
-				aux = aux->next;
-			else if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) != 0 &&
-				ft_strlen(aux->command) == 1 && aux->space == 1)
-				*cmd = ft_why(*cmd, &aux);
-			else if (ft_strnstr(aux->command, "$?", ft_strlen(aux->command)) != 0)
-				aux->command = ft_sust_doll(aux->command, shell);
-			else if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) != 0)
-				aux->command = ft_param(aux->command, shell->env);
-			if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) == 0)
-				aux = aux->next;
-		}
+			aux = ft_select_sust(cmd, aux, shell);
 	}
 	return (*cmd);
 }
