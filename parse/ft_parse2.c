@@ -6,7 +6,7 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:12:11 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/02/28 18:54:04 by david            ###   ########.fr       */
+/*   Updated: 2024/02/29 14:31:05 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static int	ft_num(char *str, char **line, int *space)
 	j = 0;
 	while (str[i] && str[i] != ' ')
 	{
-		if (str[i] == '|' || str[i] == '"' || str[i] == 39 ||
-			str[i] == '<' || str[i] == '>')
+		if (str[i] == '|' || str[i] == '"' || str[i] == 39
+			|| str[i] == '<' || str[i] == '>')
 			break ;
 		i++;
 	}
