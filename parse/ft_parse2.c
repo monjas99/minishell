@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:12:11 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/04 14:06:08 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:26:02 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ t_command	*ft_take_cmd(t_command **cmd, char *line, char *cmd_line)
 			else
 				i += ft_num(&cmd_line[i], &line, &space);
 			ft_lstadd_back_shell(cmd,
-				ft_lst_first(ft_skip_space(line), cmd_line[i], &space));
+				ft_lst_first(line, cmd_line[i], &space)); //ft_lst_first(ft_skip_space(line), cmd_line[i], &space));
 		}
 	}
 	return (ft_comp_list(*cmd));

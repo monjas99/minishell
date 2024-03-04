@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:44:42 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/04 14:59:42 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:06:09 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void		ft_shell_down(t_minishell *shell);
 t_command	*ft_take_cmd(t_command **cmd, char *line, char *cmd_line);
 
 /* FT_PARSE3.C */
-t_command	*ft_sust(t_command **cmd, t_minishell *shell);
+void	ft_sust(t_command **cmd, t_minishell *shell);
 char	*ft_param(char *line, char **env);
 
 /* FT_PARSE4.C */
@@ -126,7 +126,7 @@ t_command	*ft_comp_list(t_command	*cmd);
 t_command	*ft_select_sust(t_command **cmd, t_command *aux, t_minishell *shell);
 
 /* FT_PARSE5.C */
-t_command	*ft_inout(t_command **cmd, t_minishell *shell);
+void	ft_inout(t_command **cmd, t_minishell *shell);
 
 /* FT_PARSE6.C */
 int			ft_here(char *end, int file, t_minishell *shell);

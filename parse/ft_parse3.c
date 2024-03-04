@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:31:43 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/04 14:59:33 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:05:36 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*ft_param(char *line, char **env)
 	return (line);
 }
 
-t_command	*ft_sust(t_command **cmd, t_minishell *shell)
+void	ft_sust(t_command **cmd, t_minishell *shell)
 {
 	t_command	*aux;
 
@@ -99,5 +99,4 @@ t_command	*ft_sust(t_command **cmd, t_minishell *shell)
 		else
 			aux = ft_select_sust(cmd, aux, shell);
 	}
-	return (*cmd);
 }
