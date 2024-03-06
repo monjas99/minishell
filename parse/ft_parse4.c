@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:48:52 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/04 14:59:07 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:20:02 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 
 t_command	*ft_comp_list(t_command	*cmd)
 {
-	if (ft_lst_size(cmd) == 1)
+	if (ft_lst_size(cmd) == 1 || ft_lst_size(cmd) == 2)
 	{
 		if (ft_strchr(cmd->command, '<'))
 			return (ft_printf("syntax error near unexpected token `newline'\n") ,NULL);
-		else if (ft_strchr(cmd->command, '>'))
+		else if (ft_strchr(cmd->command, '>') || cmd->command[1] == '>')
 			return (ft_printf("syntax error near unexpected token `newline'\n"), NULL);
 		else if (ft_strchr(cmd->command, '|'))
+			return (ft_printf("syntax error near unexpected token `|'\n"), NULL);
+		else if(cmd->command[0] == '<' && cmd->command[1] == '<' && cmd->next->command[0] == '|')
+			return (ft_printf("syntax error near unexpected token `newline'\n"), NULL);
+	}
+	else
+	{
+		if(cmd->command[0] == '<' && cmd->command[1] == '<' && cmd->next->command[0] == '|')
 			return (ft_printf("syntax error near unexpected token `|'\n"), NULL);
 	}
 	return (cmd);
@@ -77,11 +84,11 @@ t_command	*ft_select_sust(t_command **cmd, t_command *aux, t_minishell *shell)
 			 && ft_strlen(aux->command) == 1 
 			 && (aux->space == 0 || (aux->space == 1 && aux->next == NULL)))
 			aux = aux->next;
+	else if (ft_strnstr(aux->command, "$?", ft_strlen(aux->command)) != 0)
+			aux->command = ft_sust_doll(aux->command, shell);
 	else if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) != 0
 			&& ft_strlen(aux->command) == 1 && aux->space == 1)
 			ft_why(*cmd, &aux);
-	else if (ft_strnstr(aux->command, "$?", ft_strlen(aux->command)) != 0)
-			aux->command = ft_sust_doll(aux->command, shell);
 	else if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) != 0)
 			aux->command = ft_param(aux->command, shell->env);
 	else if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) == 0)

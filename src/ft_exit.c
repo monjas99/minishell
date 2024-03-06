@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:03:29 by rofuente          #+#    #+#             */
-/*   Updated: 2024/01/29 19:02:25 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:49:33 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_flag(int flag, char *nb)
 
 static int	ft_code_nb(char *str)
 {
-	int	i;
+	/* int	i;
 	int	j;
 	int	flag;
 
@@ -46,7 +46,7 @@ static int	ft_code_nb(char *str)
 				flag = 1;
 		}
 		return (ft_flag(flag, ft_cp_nb(str, j)));
-	}
+	} */
 	ft_printf("exit\n");
 	return (0);
 }

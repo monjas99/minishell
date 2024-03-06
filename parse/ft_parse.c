@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/04 15:07:22 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:14:08 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static t_command	*ft_join(t_command *cmd)
 	return (free(line), *pipe);
 }
 
-/* static void	ft_pintar(t_command *cmd)
+static void	ft_pintar(t_command *cmd)
 {
 	t_command	*aux;
 
@@ -112,7 +112,7 @@ static t_command	*ft_join(t_command *cmd)
 		//ft_printf(); 
 		aux = aux->next;
 	}
-} */
+}
 
 void	ft_check_line(t_command *cmd, t_minishell *shell)
 {
@@ -130,6 +130,7 @@ void	ft_check_line(t_command *cmd, t_minishell *shell)
 	signal(SIGINT, ft_intnl);
 	signal(SIGQUIT, ft_quit);
 	cmd = ft_take_cmd(&cmd, line, cmd_line);
+	ft_pintar(cmd);
 	if (!cmd)
 		return ;
 	ft_sust(&cmd, shell);
@@ -140,5 +141,5 @@ void	ft_check_line(t_command *cmd, t_minishell *shell)
 		return ;
 	if (flag)
 		cmd->command = ft_swap(cmd->command, shell->inf);
-	ft_system(cmd, shell, ft_check_in(shell), ft_check_out(shell));
+	//ft_system(cmd, shell, ft_check_in(shell), ft_check_out(shell));
 }
