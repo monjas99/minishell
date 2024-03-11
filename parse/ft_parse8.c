@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse8.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:24:53 by rofuente          #+#    #+#             */
-/*   Updated: 2024/02/28 17:05:47 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:24:09 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ static char	*ft_spr(char **line, char *built)
 				word[j] = line[i][j];
 				j++;
 			}
-			free(line);
+			//ft_free_mtx(line);
 			return (word);
 		}
 		i++;
 	}
-	free(line);
+	//ft_free_mtx(line);
 	return ("Error");
 }
 static char	*ft_built(char *cmd)
@@ -114,7 +114,6 @@ void	ft_cmdtake(t_command **cmd)
 	while (aux)
 	{
 		aux->built = ft_built(aux->command);
-		//aux->command = ft_take_com(aux->command);
 		aux = aux->next;
 	}
 }

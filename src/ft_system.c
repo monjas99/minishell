@@ -6,7 +6,7 @@
 /*   By: rodro <rodro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:44:31 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/02 17:35:00 by rodro            ###   ########.fr       */
+/*   Updated: 2024/03/07 15:22:52 by rodro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_cw(int fdout, pid_t pd)
 
 void	ft_dupfd(int fdin, int fdout)
 {
-	if (fdin > 0 || fdin != -1)
+	if (fdin > 0)
 	{
 		dup2(fdin, STDIN_FILENO);
 		close(fdin);
@@ -106,7 +106,6 @@ void	ft_system(t_command *cmd, t_minishell *shell, int fdin, int fdout)
 	}
 	else if (ft_lstsize_shell(cmd) > 1)
 		ft_ord(cmd, shell, ft_check_in(shell), ft_check_out(shell));
-	shell->outfile = STDOUT_FILENO;
-	shell->infile = STDIN_FILENO;
+	ft_restore(shell);
 	dup2(STDIN_FILENO, STDOUT_FILENO);
 }

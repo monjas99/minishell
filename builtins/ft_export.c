@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:12:21 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/04 15:53:05 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:23:57 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	ft_change(t_minishell *shell, char *str, char *var)
 }
 
 /* Esta funcion comprueba si la variable existe, si existe cambia su contenido
-y sino la crea. Ns si hay q gestionar si te pasan una variable sin = 
+y sino la crea. Ns si hay q gestionar si te pasan una variable sin =
 Pues si jjaajjaajja */
 
 void	ft_exist(char *cmd, t_minishell *shell, int fd)
@@ -104,9 +104,6 @@ void	ft_exist(char *cmd, t_minishell *shell, int fd)
 		return ;
 	}
 	i = 0;
-	/* while (ft_strnstr(command[i], "=", ft_strlen(command[i])) == 0)   esto lo he puesto para gestionar export a david=hola
-		i++;
-	i--; */
 	while (command[++i])
 	{
 		var = ft_get_var(command[i]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exutil2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:44:48 by rofuente          #+#    #+#             */
-/*   Updated: 2024/02/26 15:16:38 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:25:17 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static char	*ft_cpy_ct(char *str, int i)
 	int		j;
 	int		n;
 
+	if (str[i] == '=')
+		i += 1;
 	j = i;
 	while (str[j])
 		j++;
@@ -41,7 +43,7 @@ char	*ft_get_content(char *str, char *var)
 
 	if (!str || !var)
 		return (NULL);
-	ct = ft_cpy_ct(str, (ft_strlen(var) + 1));
+	ct = ft_cpy_ct(str, (ft_strlen(var)));
 	if (ct != NULL && ct[0] == '\0')
 	{
 		free(ct);

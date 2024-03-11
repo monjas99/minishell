@@ -3,14 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:03:29 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/05 19:49:33 by david            ###   ########.fr       */
+/*   Updated: 2024/03/06 17:48:02 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static void	ft_free_exit(t_command **cmd, t_minishell **shell)
+{
+	ft_free_cmd(cmd);
+	free((*shell)->cmd_line);
+	if ((*shell)->path)
+		free((*shell)->path);
+	if ((*shell)->pwd)
+		free((*shell)->pwd);
+	if ((*shell)->oldpwd)
+		free((*shell)->oldpwd);
+	if ((*shell)->root)
+		free((*shell)->root);
+	if ((*shell)->env && (*shell)->env[0])
+		ft_free_mtx((*shell)->env);
+	if ((*shell)->inf)
+		free((*shell)->inf);
+	if ((*shell)->here)
+		free((*shell)->here);
+	*shell = NULL;
+}
 
 static int	ft_flag(int flag, char *nb)
 {
@@ -24,11 +45,11 @@ static int	ft_flag(int flag, char *nb)
 
 static int	ft_code_nb(char *str)
 {
-	/* int	i;
+	int	i;
 	int	j;
 	int	flag;
 
-	i = -1;
+	i = 0;
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	while (str[++i])
@@ -46,7 +67,7 @@ static int	ft_code_nb(char *str)
 				flag = 1;
 		}
 		return (ft_flag(flag, ft_cp_nb(str, j)));
-	} */
+	}
 	ft_printf("exit\n");
 	return (0);
 }
@@ -54,14 +75,20 @@ static int	ft_code_nb(char *str)
 void	ft_exit_code(t_command *cmd, t_minishell *shell)
 {
 	char	**tmp;
+	int		i;
 
 	tmp = ft_split(cmd->command, ' ');
 	if (shell->shlvl == 1)
 	{
 		if (tmp[1])
-			exit (ft_code_nb(shell->cmd_line));
+		{
+			i = ft_code_nb(shell->cmd_line);
+			ft_free_exit(&cmd, &shell);
+			exit (i);
+		}
 		else
 		{
+			ft_free_exit(&cmd, &shell);
 			ft_printf("exit\n");
 			exit (0);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:12:11 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/05 18:50:55 by david            ###   ########.fr       */
+/*   Updated: 2024/03/06 15:33:08 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static int	ft_num(char *str, char **line, int *space)
 	return (i - 1);
 }
 
-
 static int	ft_car(char *str, char **line)
 {
 	int	i;
@@ -96,9 +95,9 @@ static int	ft_car(char *str, char **line)
 	i = 1;
 	j = 0;
 	if (str[0] == str[1] && str[1] == str[2])
-		ft_error_car();
+		g_code_error = 258;
 	if (str[0] == '|' && str[1] == '|')
-		ft_error_car();
+		g_code_error = 258;
 	if (str[0] == str[1])
 		i = 2;
 	line[0] = malloc(sizeof(char) * i + 1);
@@ -135,7 +134,7 @@ t_command	*ft_take_cmd(t_command **cmd, char *line, char *cmd_line)
 			else
 				i += ft_num(&cmd_line[i], &line, &space);
 			ft_lstadd_back_shell(cmd,
-				ft_lst_first(line, cmd_line[i], &space)); //ft_lst_first(ft_skip_space(line), cmd_line[i], &space));
+				ft_lst_first(line, cmd_line[i], &space));
 		}
 	}
 	return (ft_comp_list(*cmd));

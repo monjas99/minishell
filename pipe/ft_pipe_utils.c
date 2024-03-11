@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rodro <rodro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:05:35 by rodro             #+#    #+#             */
-/*   Updated: 2024/03/02 17:16:48 by rodro            ###   ########.fr       */
+/*   Updated: 2024/03/11 15:48:31 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ void	ft_free_cmd(t_command **cmd)
 
 	while (*cmd)
 	{
+		ft_printf("%s\n", cmd[0]->command);
 		aux = (*cmd)->next;
 		free(cmd[0]->command);
-		free(cmd[0]->built);
-		if (cmd[0]->next)
-			free(cmd[0]->next);
+		//free(cmd[0]->built);
+		//if (cmd[0]->next)
+		//	free(cmd[0]->next);
 		free (*cmd);
 		*cmd = aux;
 	}
@@ -40,16 +41,16 @@ void	ft_free_cmd(t_command **cmd)
 
 int	ft_check_in(t_minishell *shell)
 {
-	if (shell->infile)
+	if (shell->infile && shell->infile != -1)
 		return (shell->infile);
-	return (0);
+	return (STDIN_FILENO);
 }
 
 int	ft_check_out(t_minishell *shell)
 {
-	if (shell->outfile)
+	if (shell->outfile && shell->outfile != -1)
 		return (shell->outfile);
-	return (1);
+	return (STDOUT_FILENO);
 }
 
 int	ft_lst_size(t_command *lst)
