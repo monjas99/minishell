@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:05:35 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/11 15:49:40 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:07:00 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_free_simple(t_command **cmd)
-{
-	t_command	*aux;
-
-	while (*cmd)
-	{
-		aux = (*cmd)->next;
-		free(cmd[0]->command);
-		free (*cmd);
-		*cmd = aux;
-	}
-	cmd = NULL;
-}
 
 static pid_t	ft_single(char **cmd, t_minishell *shell, int fdin, int fdout)
 {

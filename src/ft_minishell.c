@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:31:09 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/11 15:39:14 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:07:53 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ static void	ft_free_cmdline(t_minishell *shell, t_command **cmd)
 		free(shell->here);
 		shell->here = NULL;
 	}
-	/* if (shell->del)
-		ft_free_mtx(shell->del); */
-	//ft_free_cmd(cmd);
+	if (shell->del)
+		ft_free_mtx(shell->del);
+	ft_free_cmd(cmd);
 	return ;
 }
 
@@ -74,12 +74,12 @@ static void	ft_sig_disable(void)
 	signal(SIGINT, ft_int);
 }
 
-int	main(int ac, char **av, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	t_minishell	shell;
 	t_command	*cmd;
 
-	if (ac != 1 || av[1])
+	if (argc != 1 || argv[1])
 		ft_error_arguments();
 	ft_init_var(&shell, env);
 	ft_signal_dis();
@@ -97,7 +97,7 @@ int	main(int ac, char **av, char **env)
 		g_code_error = 0;
 		shell.cmd_line[ft_strlen(shell.cmd_line)] = '\0';
 		add_history(shell.cmd_line);
-		ft_check_line(&cmd, &shell);
+		cmd = ft_check_line(cmd, &shell);
 		ft_free_cmdline(&shell, &cmd);
 		system("leaks -q minishell");
 	}

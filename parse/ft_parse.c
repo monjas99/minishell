@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/11 15:42:37 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:08:12 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,20 @@ void	ft_shell_down(t_minishell *shell)
 	}
 }
 
-static t_command	*ft_join(t_command **cmd)
+static t_command	*ft_join(t_command *cmd)
 {
-	t_command	**pipe;
+	t_command	*pipe;
 	t_command	*aux;
 	char		*line;
 
-	pipe = malloc(sizeof(t_command));
-	*pipe = 0;
+	pipe = NULL;
 	line = NULL;
-	aux = *cmd;
+	aux = cmd;
 	while (aux)
 	{
 		if (ft_strlen(aux->command) == 1 && aux->command[0] == '|')
 		{
-			ft_lstadd_back_shell(pipe, ft_lstnew_shell(line));
+			ft_lstadd_back_shell(&pipe, ft_lstnew_shell(line));
 			free(line);
 			line = NULL;
 			aux = aux->next;
@@ -94,12 +93,12 @@ static t_command	*ft_join(t_command **cmd)
 			line = ft_strjoin_gnl(line, " ");
 		aux = aux->next;
 	}
-	ft_lstadd_back_shell(pipe, ft_lstnew_shell(line));
-	ft_free_simple(cmd);
-	return (free(line), *pipe);
+	ft_lstadd_back_shell(&pipe, ft_lstnew_shell(line));
+	ft_free_cmd(&cmd);
+	return (free(line), pipe);
 }
 
-void	ft_check_line(t_command **cmd, t_minishell *shell)
+t_command	*ft_check_line(t_command *cmd, t_minishell *shell)
 {
 	char	*line;
 	char	*cmd_line;
@@ -109,22 +108,22 @@ void	ft_check_line(t_command **cmd, t_minishell *shell)
 	flag = 0;
 	cmd_line = shell->cmd_line;
 	if (cmd_line[0] == '\0')
-		return ;
+		return (NULL);
 	if (cmd_line[0] == '<')
 		flag = 1;
 	signal(SIGINT, ft_intnl);
 	signal(SIGQUIT, ft_quit);
-	cmd[0] = ft_take_cmd(cmd, line, cmd_line);
-	if (!cmd[0])
-		return ;
-	ft_sust(cmd, shell);
- 	ft_inout(cmd, shell);
-	cmd[0] = ft_join(cmd);
-	/* ft_cmdtake(cmd);
+	cmd = ft_take_cmd(&cmd, line, cmd_line);
+	if (!cmd)
+		return (NULL);
+	ft_sust(&cmd, shell);
+	ft_inout(&cmd, shell);
+	cmd = ft_join(cmd);
+	ft_cmdtake(&cmd);
 	if (g_code_error != 0)
-		return ; */
-	ft_free_cmd(cmd);
-	/* if (flag)
-		cmd[0]->command = ft_swap(cmd[0]->command, shell->inf); */
-	//ft_system(cmd, shell, ft_check_in(shell), ft_check_out(shell));
+		return (cmd);
+	if (flag)
+		cmd->command = ft_swap(cmd->command, shell->inf);
+	return (ft_system(cmd, shell, ft_check_in(shell), ft_check_out(shell)), cmd);
 }
+

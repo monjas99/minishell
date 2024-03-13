@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:05:35 by rodro             #+#    #+#             */
-/*   Updated: 2024/03/11 15:48:31 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:36:01 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,29 @@ void	ft_free_cmd(t_command **cmd)
 
 	while (*cmd)
 	{
-		ft_printf("%s\n", cmd[0]->command);
 		aux = (*cmd)->next;
 		free(cmd[0]->command);
-		//free(cmd[0]->built);
-		//if (cmd[0]->next)
-		//	free(cmd[0]->next);
-		free (*cmd);
+		if (cmd[0]->built && !ft_strnstr(cmd[0]->built, "exec", ft_strlen(cmd[0]->built)))
+			free(cmd[0]->built);
+		free(*cmd);
 		*cmd = aux;
 	}
-	cmd = NULL;
+	free(*cmd);
+	*cmd = NULL;
 }
 
 int	ft_check_in(t_minishell *shell)
 {
-	if (shell->infile && shell->infile != -1)
+	if (shell->infile > 0)
 		return (shell->infile);
-	return (STDIN_FILENO);
+	return (0);
 }
 
 int	ft_check_out(t_minishell *shell)
 {
-	if (shell->outfile && shell->outfile != -1)
+	if (shell->outfile > 1)
 		return (shell->outfile);
-	return (STDOUT_FILENO);
+	return (1);
 }
 
 int	ft_lst_size(t_command *lst)

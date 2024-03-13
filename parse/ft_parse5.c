@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 12:18:39 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/04 15:06:01 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:05:32 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	ft_inout(t_command **cmd, t_minishell *shell)
 			break ;
 		if (ft_strchr(aux->next->command, '<') && aux->next->dollar == 0)
 		{
-			if (shell->inf == NULL)
+			if (shell->inf != NULL)
 				free (shell->inf);
 			shell->inf = ft_strdup(aux->next->next->command);
 			shell->infile = ft_inf(aux->next->next->command, aux->next->command, shell);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse9.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 17:50:00 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/06 15:45:04 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:29:01 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,33 @@
 
 t_command	*ft_out_chech(t_command *cmd)
 {
+	ft_free_cmd(&cmd);
+	/* t_command *aux;
+
+	aux = cmd;
 	if (ft_strchr(cmd->command, '>'))
-		cmd = cmd->next;
+	{
+		aux = cmd->next;
+		free(cmd->command);
+		free(cmd->built);
+		free(cmd->next);
+	}
+	cmd = aux;
 	if (ft_strchr(cmd->command, '>'))
-		cmd = cmd->next;
+	{
+		aux = cmd->next;
+		free(cmd->command);
+		free(cmd->next);
+	}
 	if (cmd->next != NULL)
-		return (cmd->next);
+	{
+		ft_printf("llego");
+		aux = cmd->next;
+		free(cmd->command);
+		free(cmd->next);
+	}
+	free (aux->command);
+	free (aux->next); */
 	return (NULL);
 }
 

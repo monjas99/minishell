@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:44:42 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/11 15:35:54 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:15:22 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void		ft_cd(char *cmd, t_minishell *shell);
 
 /* ----- PARSE ----- */
 /* FT_PARSE.C */
-void		ft_check_line(t_command **cmd, t_minishell *shell);
+t_command	*ft_check_line(t_command *cmd, t_minishell *shell);
 void		ft_shell_up(t_minishell *shell);
 void		ft_shell_down(t_minishell *shell);
 
@@ -168,7 +168,6 @@ int			ft_lst_size(t_command *lst);
 /* FT_PIPE_UTILS2.C */
 pid_t		ft_order_single(char *cmd, t_minishell *shell, int fdin, int fdout);
 void		ft_close(int fd1, int fd2);
-void		ft_free_simple(t_command **cmd);
 
 /* ----- SRC ----- */
 /* FT_UTILS.C */
@@ -217,6 +216,5 @@ int			ft_cw(int fdout, pid_t pd);
 
 /* FT_PATH.C */
 char		*ft_cmdpath(char *cmd, char **env);
-void		ft_restore(t_minishell *shell);
 
 #endif
