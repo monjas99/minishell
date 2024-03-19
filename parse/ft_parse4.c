@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:48:52 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/13 18:07:36 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:49:01 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static void	ft_why(t_command *cmd, t_command **change)
 	while (cmd && (ft_strnstr(aux->next->command, "$",
 				ft_strlen(aux->next->command)) == 0))
 		aux = aux->next;
-	free (aux_change->command);
-	free (aux_change);
 	aux->next = aux->next->next;
 }
 
@@ -101,8 +99,8 @@ t_command	*ft_select_sust(t_command **cmd, t_command *aux, t_minishell *shell)
 	else if (ft_strnstr(aux->command, "$", ft_strlen(aux->command)) != 0)
 	{
 		tmp = ft_param(aux->command, shell->env);
-		/* if (tmp[0] == '\0')
-			tmp = ft_calloc(1, 1); */
+		if (tmp[0] == '\0')
+			tmp = ft_calloc(1, 1);
 		free(aux->command);
 		aux->command = tmp;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:12:21 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/12 18:18:44 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:28:55 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	ft_new_env(t_minishell *shell)
 static void	ft_export(t_minishell *shell, char *var, char *ct)
 {
 	int		i;
-	char	*str;
 	char	*new;
 
 	i = 0;
@@ -54,14 +53,11 @@ static void	ft_export(t_minishell *shell, char *var, char *ct)
 	ft_new_env(shell);
 	while (shell->env[i])
 		i++;
-	str = ft_strjoin(var, "=");
 	if (!ct)
-		new = ft_strdup(str);
+		new = ft_strdup(var);
 	else
-		new = ft_strjoin(str, ct);
+		new = ft_strjoin(var, ct);
 	shell->env[i] = ft_strdup(new);
-	if (str)
-		free (str);
 	if (new)
 		free (new);
 	i++;
@@ -71,12 +67,17 @@ static void	ft_export(t_minishell *shell, char *var, char *ct)
 static void	ft_change(t_minishell *shell, char *str, char *var)
 {
 	int		i;
+	int		j;
 
+	j = 0;
+	while (var[j] != '=')
+		j++;
 	i = -1;
 	while (shell->env[++i])
 	{
-		if (!ft_strncmp(shell->env[i], var, ft_strlen(var)))
+		if (!ft_strncmp(shell->env[i], var, j))
 		{
+			ft_printf("%s\n", shell->env[i]);
 			free(shell->env[i]);
 			shell->env[i] = ft_strdup(str);
 			break ;

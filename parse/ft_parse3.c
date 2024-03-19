@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:31:43 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/13 17:23:31 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:48:56 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ static char	*ft_change(char *fir_line, char *sec_line, char *change, char **env)
 	}
 	else
 	{
-
 		line = ft_strdup(fir_line);
 		if (sec_line)
 			line = ft_strjoin_gnl(line, sec_line);
 	}
 	free(change);
+	if (pos == -1 && fir_line)
+		free(fir_line);
 	if (sec_line)
 		free(sec_line);
 	return (line);
@@ -107,9 +108,6 @@ char	*ft_param(char *line, char **env)
 void	ft_sust(t_command **cmd, t_minishell *shell)
 {
 	t_command	*aux;
-	int	i;
-
-	i = 0;
 
 	aux = *cmd;
 	while (aux)
@@ -118,6 +116,5 @@ void	ft_sust(t_command **cmd, t_minishell *shell)
 			aux = aux->next;
 		else
 			aux = ft_select_sust(cmd, aux, shell);
-		i++;
 	}
 }

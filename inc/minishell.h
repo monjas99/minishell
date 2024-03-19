@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rodro <rodro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:44:42 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/12 19:15:22 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:22:42 by rodro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void		ft_exist(char *cmd, t_minishell *shell, int fd);
 int			ft_check_var(char *str, char **env);
 char		*ft_get_var(char *cmd);
 int			ft_strcmp(char *s1, char *s2);
+int			ft_contain(char *str, char c);
 
 /* FT_EXUTIL2.C */
 char		*ft_get_content(char *str, char *var);
@@ -109,7 +110,7 @@ void		ft_cd(char *cmd, t_minishell *shell);
 
 /* ----- PARSE ----- */
 /* FT_PARSE.C */
-t_command	*ft_check_line(t_command *cmd, t_minishell *shell);
+void		ft_check_line(t_command *cmd, t_minishell *shell);
 void		ft_shell_up(t_minishell *shell);
 void		ft_shell_down(t_minishell *shell);
 
