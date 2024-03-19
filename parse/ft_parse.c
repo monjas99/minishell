@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rodro <rodro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/13 20:09:36 by rodro            ###   ########.fr       */
+/*   Updated: 2024/03/19 22:37:51 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,10 @@ void	ft_check_line(t_command *cmd, t_minishell *shell)
 	int		flag;
 
 	line = NULL;
-	flag = 0;
 	cmd_line = shell->cmd_line;
 	if (cmd_line[0] == '\0')
 		return ;
-	if (cmd_line[0] == '<')
-		flag = 1;
+	flag = ft_flag_parse(cmd_line);
 	signal(SIGINT, ft_intnl);
 	signal(SIGQUIT, ft_quit);
 	cmd = ft_take_cmd(&cmd, line, cmd_line);
@@ -125,5 +123,6 @@ void	ft_check_line(t_command *cmd, t_minishell *shell)
 		return (ft_free_cmd(&cmd));
 	if (flag)
 		cmd->command = ft_swap(cmd->command, shell->inf);
-	return (ft_system(cmd, shell, ft_check_in(shell), ft_check_out(shell)), ft_free_cmd(&cmd));
+	return (ft_system(cmd, shell, ft_check_in(shell),
+			ft_check_out(shell)), ft_free_cmd(&cmd));
 }

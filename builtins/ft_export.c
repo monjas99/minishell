@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:12:21 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/19 11:28:55 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:04:23 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ static void	ft_change(t_minishell *shell, char *str, char *var)
 	{
 		if (!ft_strncmp(shell->env[i], var, j))
 		{
-			ft_printf("%s\n", shell->env[i]);
 			free(shell->env[i]);
 			shell->env[i] = ft_strdup(str);
 			break ;
@@ -107,6 +106,7 @@ void	ft_exist(char *cmd, t_minishell *shell, int fd)
 	{
 		var = ft_get_var(command[i]);
 		ct = ft_get_content(command[i], var);
+		ft_printf("%d\n", ft_check_var(var, shell->env));
 		if (!ft_check_var(var, shell->env))
 			ft_export(shell, var, ct);
 		else

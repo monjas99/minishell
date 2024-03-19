@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+         #
+#    By: david <david@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 10:00:52 by dmonjas-          #+#    #+#              #
-#    Updated: 2024/03/19 13:03:16 by dmonjas-         ###   ########.fr        #
+#    Updated: 2024/03/19 22:29:00 by david            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,14 @@ LIB	=	ar rcs
 RM	=	rm -f
 
 ###CASA###
-#READLINE_DIR = $(shell brew --prefix readline)
-#FLAG	=	-lreadline -lhistory -L $(READLINE_DIR)/lib
-###42###
-READLINE_DIR = /sgoinfre/students/$(USER)/homebrew/opt/readline
+READLINE_DIR = $(shell brew --prefix readline)
 FLAG	=	-lreadline -lhistory -L $(READLINE_DIR)/lib
+###42###
+#READLINE_DIR = /sgoinfre/students/$(USER)/homebrew/opt/readline
+#FLAG	=	-lreadline -lhistory -L $(READLINE_DIR)/lib
 
 CC	=	gcc
-CFLAGS	=	-g -Wall -Wextra -I ./inc -I ./libft/inc/ -I $(READLINE_DIR)/include
+CFLAGS	=	-g -Wall -Werror -Wextra -I ./inc -I ./libft/inc/ -I $(READLINE_DIR)/include
 DEBUG	=	-g3 -fsanitize=address
 
 NAME	=	minishell

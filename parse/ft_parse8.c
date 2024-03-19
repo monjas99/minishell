@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse8.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:24:53 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/19 12:28:14 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:42:16 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*ft_swap(char *cmd, char *inf)
 {
 	char	**tmp;
 	char	*command;
+	char	*aux;
 	int		i;
 
 	i = 1;
@@ -43,10 +44,12 @@ char	*ft_swap(char *cmd, char *inf)
 		free (tmp);
 		return ("ERROR INF");
 	}
-	command = ft_strjoin(tmp[1], " ");
-	command = ft_strjoin_gnl(command, inf);
+	command = ft_strjoin(tmp[i], " ");
+	aux = command;
+	command = ft_strjoin(command, inf);
+	free(aux);
 	while (tmp[++i])
-		command = ft_strjoin_gnl(command, tmp[i]);
+		command = ft_strjoin(command, tmp[i]);
 	ft_free_mtx(tmp);
 	free(cmd);
 	return (command);
@@ -78,6 +81,7 @@ static char	*ft_spr(char **line, char *built)
 	ft_free_mtx(line);
 	return ("Error");
 }
+
 static char	*ft_built(char *cmd)
 {
 	if (ft_strnstr(cmd, "echo", ft_strlen(cmd))

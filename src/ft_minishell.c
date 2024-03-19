@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:31:09 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/19 13:06:50 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:44:56 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	ft_cpy_no_env(t_minishell *shell)
 {
-	//shell->pwd = NULL;
 	shell->env = malloc(sizeof(char *) * 4);
 	shell->env[0] = ft_strjoin("PWD=", getcwd(shell->pwd, 100));
 	shell->env[1] = ft_strdup("SHLVL=1");

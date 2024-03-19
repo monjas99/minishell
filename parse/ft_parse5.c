@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse5.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 12:18:39 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/19 12:59:04 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:25:56 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void	ft_inout(t_command **cmd, t_minishell *shell)
 		{
 			shell->outfile = ft_open(aux->next->next->command, aux->next->command, shell);
 			aux->next = ft_out_chech(aux->next);
-			
 		}
 		else
 			aux = aux->next;

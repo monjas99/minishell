@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:48:52 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/13 18:49:01 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:40:26 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,26 @@
 t_command	*ft_comp_list(t_command	*cmd)
 {
 	if (ft_strchr(cmd->command, '>'))
-	return (ft_printf("syntax error near unexpected token `newline'\n"), g_code_error = 2258, NULL);
+		return (ft_printf("syntax error near unexpected token `newline'\n"),
+			g_code_error = 2258, NULL);
 	if (ft_lst_size(cmd) == 1 || ft_lst_size(cmd) == 2)
 	{
 		if (ft_strchr(cmd->command, '<') || ft_strchr(cmd->command, '>'))
-			return (ft_printf("syntax error near unexpected token `newline'\n"), g_code_error = 2258, NULL);
+			return (ft_printf("syntax error near unexpected token `newline'\n"),
+				g_code_error = 2258, NULL);
 		else if (ft_strchr(cmd->command, '>') || cmd->command[1] == '>')
-			return (ft_printf("syntax error near unexpected token `newline'\n"), g_code_error = 2258, NULL);
+			return (ft_printf("syntax error near unexpected token `newline'\n"),
+				g_code_error = 2258, NULL);
 		else if (ft_strchr(cmd->command, '|'))
-			return (ft_printf("syntax error near unexpected token `|'\n"), g_code_error = 2258, NULL);
-		else if(cmd->command[0] == '<' && cmd->command[1] == '<' && cmd->next->command[0] == '|')
-			return (ft_printf("syntax error near unexpected token `newline'\n"), g_code_error = 2258, NULL);
+			return (ft_printf("syntax error near unexpected token `|'\n"),
+				g_code_error = 2258, NULL);
+		else if (cmd->command[0] == '<' && cmd->command[1] == '<'
+			&& cmd->next->command[0] == '|')
+			return (ft_printf("syntax error near unexpected token `newline'\n"),
+				g_code_error = 2258, NULL);
 	}
 	else if (ft_checker(cmd))
-			return (NULL);
+		return (NULL);
 	return (cmd);
 }
 

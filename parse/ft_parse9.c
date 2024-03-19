@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse9.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 17:50:00 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/19 13:02:19 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:43:42 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-t_command	*ft_out_chech(t_command *cmd)
-{
-	if (ft_strchr(cmd->command, '>'))
-		cmd = ft_del_node(cmd);
-	if (ft_strchr(cmd->command, '>'))
-		cmd = ft_del_node(cmd);
-	if (cmd->next != NULL)
-	{
-		cmd = ft_del_node(cmd);
-		return (cmd);
-	}
-	else
-		ft_del_node(cmd);
-	return (NULL);
-}
 
 t_command	*ft_del_node(t_command *aux)
 {
@@ -45,17 +29,26 @@ t_command	*ft_del_node(t_command *aux)
 	return (cmd);
 }
 
+t_command	*ft_out_chech(t_command *cmd)
+{
+	if (ft_strchr(cmd->command, '>'))
+		cmd = ft_del_node(cmd);
+	if (ft_strchr(cmd->command, '>'))
+		cmd = ft_del_node(cmd);
+	if (cmd->next != NULL)
+		return (ft_del_node(cmd));
+	return (ft_del_node(cmd));
+}
+
 void	ft_unlink(char **cmd)
 {
 	int	i;
 
 	if (!cmd || !cmd[0])
 		return ;
-	i = 0;
+	i = -1;
 	while (cmd[++i])
 		unlink(cmd[i]);
-	ft_free_mtx(cmd);
-	cmd = NULL;
 }
 
 char	**ft_take_one(char **cmd)
@@ -86,12 +79,13 @@ char	**ft_take_one(char **cmd)
 
 int	ft_checker(t_command *cmd)
 {
-	if(cmd->command[0] == '<' && cmd->command[1] == '<' && cmd->next->command[0] == '|')
+	if (cmd->command[0] == '<' && cmd->command[1] == '<'
+		&& cmd->next->command[0] == '|')
 		return (ft_printf("syntax error near unexpected token `|'\n"),
-		g_code_error = 258, 1);
-	else if(cmd->command[0] == '<' && cmd->next->command[0] == '|')
+			g_code_error = 258, 1);
+	else if (cmd->command[0] == '<' && cmd->next->command[0] == '|')
 		return (ft_printf("syntax error near unexpected token `newline'\n"),
-		g_code_error = 258, 1);
+			g_code_error = 258, 1);
 	if (ft_strchr(cmd->command, '<')
 		&& ft_strchr(cmd->next->command, '|')
 		&& ft_strchr(cmd->next->next->command, '>'))

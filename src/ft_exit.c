@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:03:29 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/19 13:03:35 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:36:39 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	ft_flag_parse(char *line)
+{
+	char	**s;
+
+	s = ft_split(line, ' ');
+	if (s[0][0] == '<')
+		return (1);
+	return (0);
+}
 
 static void	ft_free_exit(t_command **cmd, t_minishell **shell)
 {

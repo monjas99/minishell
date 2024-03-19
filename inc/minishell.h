@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:44:42 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/19 12:52:16 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:36:45 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,20 +118,20 @@ void		ft_shell_down(t_minishell *shell);
 t_command	*ft_take_cmd(t_command **cmd, char *line, char *cmd_line);
 
 /* FT_PARSE3.C */
-void	ft_sust(t_command **cmd, t_minishell *shell);
-char	*ft_param(char *line, char **env);
+void		ft_sust(t_command **cmd, t_minishell *shell);
+char		*ft_param(char *line, char **env);
 
 /* FT_PARSE4.C */
 char		*ft_sust_doll(char *line, t_minishell *shell);
 t_command	*ft_comp_list(t_command	*cmd);
-t_command	*ft_select_sust(t_command **cmd, t_command *aux, t_minishell *shell);
+t_command	*ft_select_sust(t_command **cmd, t_command *aux,
+				t_minishell *shell);
 
 /* FT_PARSE5.C */
-void	ft_inout(t_command **cmd, t_minishell *shell);
+void		ft_inout(t_command **cmd, t_minishell *shell);
 
 /* FT_PARSE6.C */
 int			ft_here(char *end, int file, t_minishell *shell);
-
 
 /* FT_PARSE7.C */
 char		*ft_find_var(char *line, char **env);
@@ -186,6 +186,7 @@ void		ft_per_nb(char *s, int nb);
 
 /* FT_EXIT.C */
 void		ft_exit_code(t_command *cmd, t_minishell *shell);
+int			ft_flag_parse(char *line);
 
 /* FT_ERROR.C */
 void		ft_put_msg(char *var, char *s);
