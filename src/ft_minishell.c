@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:31:09 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/13 19:11:36 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:06:50 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static void	ft_free_cmdline(t_minishell *shell, t_command **cmd)
 	if (shell->del)
 		ft_free_mtx(shell->del);
 	*cmd = NULL;
-	//ft_free_cmd(cmd);
 	return ;
 }
 

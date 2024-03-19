@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 17:50:00 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/19 12:27:06 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:02:19 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 t_command	*ft_out_chech(t_command *cmd)
 {
-	//ft_free_cmd(&cmd);
 	if (ft_strchr(cmd->command, '>'))
-		cmd = cmd->next;
+		cmd = ft_del_node(cmd);
 	if (ft_strchr(cmd->command, '>'))
-		cmd = cmd->next;
+		cmd = ft_del_node(cmd);
 	if (cmd->next != NULL)
-		return (cmd->next);
+	{
+		cmd = ft_del_node(cmd);
+		return (cmd);
+	}
+	else
+		ft_del_node(cmd);
 	return (NULL);
 }
 
