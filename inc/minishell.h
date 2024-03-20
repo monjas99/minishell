@@ -6,7 +6,7 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:44:42 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/19 22:36:45 by david            ###   ########.fr       */
+/*   Updated: 2024/03/20 20:15:38 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ int			ft_lst_size(t_command *lst);
 /* FT_PIPE_UTILS2.C */
 pid_t		ft_order_single(char *cmd, t_minishell *shell, int fdin, int fdout);
 void		ft_close(int fd1, int fd2);
+void		ft_dupfd(int fdin, int fdout);
 
 /* ----- SRC ----- */
 /* FT_UTILS.C */
@@ -186,12 +187,12 @@ void		ft_per_nb(char *s, int nb);
 
 /* FT_EXIT.C */
 void		ft_exit_code(t_command *cmd, t_minishell *shell);
-int			ft_flag_parse(char *line);
+int			ft_size_param(char *line);
 
 /* FT_ERROR.C */
 void		ft_put_msg(char *var, char *s);
 void		ft_error(char *str);
-void		ft_per(char *var, char *s);
+void		ft_per(char *var, char *s, int i);
 void		ft_free_mtx(char **mtx);
 void		ft_error_perror(char *command, char *s);
 
@@ -213,10 +214,10 @@ void		ft_signal_dis(void);
 void		ft_system(t_command *cmd, t_minishell *shell, int fdin, int fdout);
 void		ft_exec(char **cmd, t_minishell *shell, int fdin, int fdout);
 char		*ft_cmdpath(char *cmd, char **env);
-void		ft_dupfd(int fdin, int fdout);
 int			ft_cw(int fdout, pid_t pd);
 
 /* FT_PATH.C */
 char		*ft_cmdpath(char *cmd, char **env);
+void		ft_next_lvl(t_minishell *shell, int fdout);
 
 #endif

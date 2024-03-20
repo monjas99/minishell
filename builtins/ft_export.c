@@ -6,7 +6,7 @@
 /*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:12:21 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/19 18:04:23 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:30:54 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	ft_change(t_minishell *shell, char *str, char *var)
 	int		j;
 
 	j = 0;
-	while (var[j] != '=')
+	while (var[j] != '=' && var[j])
 		j++;
 	i = -1;
 	while (shell->env[++i])
@@ -106,7 +106,6 @@ void	ft_exist(char *cmd, t_minishell *shell, int fd)
 	{
 		var = ft_get_var(command[i]);
 		ct = ft_get_content(command[i], var);
-		ft_printf("%d\n", ft_check_var(var, shell->env));
 		if (!ft_check_var(var, shell->env))
 			ft_export(shell, var, ct);
 		else

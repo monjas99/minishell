@@ -6,41 +6,26 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:03:29 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/19 22:36:39 by david            ###   ########.fr       */
+/*   Updated: 2024/03/20 20:26:22 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_flag_parse(char *line)
+int	ft_size_param(char *line)
 {
-	char	**s;
+	int	i;
 
-	s = ft_split(line, ' ');
-	if (s[0][0] == '<')
-		return (1);
-	return (0);
-}
-
-static void	ft_free_exit(t_command **cmd, t_minishell **shell)
-{
-	ft_free_cmd(cmd);
-	free((*shell)->cmd_line);
-	if ((*shell)->path)
-		free((*shell)->path);
-	if ((*shell)->pwd)
-		free((*shell)->pwd);
-	if ((*shell)->oldpwd)
-		free((*shell)->oldpwd);
-	if ((*shell)->root)
-		free((*shell)->root);
-	if ((*shell)->env && (*shell)->env[0])
-		ft_free_mtx((*shell)->env);
-	if ((*shell)->inf)
-		free((*shell)->inf);
-	if ((*shell)->here)
-		free((*shell)->here);
-	*shell = NULL;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '/')
+			return (i);	
+		i++;
+	}
+	/* if (line[i - 1] == '/')
+		return (i - 1); */
+	return (i);	
 }
 
 static int	ft_flag(int flag, char *nb)
@@ -82,30 +67,38 @@ static int	ft_code_nb(char *str)
 	return (0);
 }
 
+static void	ft_check_arg(char **tmp, t_minishell *shell)
+{
+	if (tmp[1])
+		exit (ft_code_nb(shell->cmd_line));
+	else
+	{
+		ft_printf("exit\n");
+		exit (0);
+	}
+}
+
 void	ft_exit_code(t_command *cmd, t_minishell *shell)
 {
 	char	**tmp;
 	int		i;
 
 	tmp = ft_split(cmd->command, ' ');
-	if (shell->shlvl == 1)
+	i = 0;
+	while (tmp[i])
+		i++;
+	if (i > 2)
 	{
-		if (tmp[1])
-		{
-			i = ft_code_nb(shell->cmd_line);
-			ft_free_exit(&cmd, &shell);
-			exit (i);
-		}
-		else
-		{
-			ft_free_exit(&cmd, &shell);
-			ft_printf("exit\n");
-			exit (0);
-		}
+		ft_printf("exit\n");
+		ft_putstr_fd("exit : too many arguments\n", STDERR_FILENO);
+		g_code_error = 1;
 	}
+	else if (shell->shlvl == 1)
+		ft_check_arg(tmp, shell);
 	else
 	{
-		g_code_error = ft_code_nb(shell->cmd_line);
 		ft_shell_down(shell);
+		exit(ft_code_nb(shell->cmd_line));
 	}
+	ft_free_mtx(tmp);
 }

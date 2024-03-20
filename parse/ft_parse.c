@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/19 22:37:51 by david            ###   ########.fr       */
+/*   Updated: 2024/03/20 16:37:16 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ void	ft_shell_up(t_minishell *shell)
 		if (!ft_strncmp(shell->env[i], "SHLVL", 5))
 		{
 			j = -1;
-			while (shell->env[i][++j])
-				if (shell->env[i][j] == '=')
-					break ;
+			while (shell->env[i][j] != '=')
+				j++;
 			k = 0;
 			while (shell->env[i][++j])
 			{
@@ -39,6 +38,7 @@ void	ft_shell_up(t_minishell *shell)
 			break ;
 		}
 	}
+	free(aux);
 }
 
 void	ft_shell_down(t_minishell *shell)
@@ -56,9 +56,8 @@ void	ft_shell_down(t_minishell *shell)
 		if (!ft_strncmp(shell->env[i], "SHLVL", 5))
 		{
 			j = -1;
-			while (shell->env[i][++j])
-				if (shell->env[i][j] == '=')
-					break ;
+			while (shell->env[i][j] != '=')
+				j++;
 			k = 0;
 			while (shell->env[i][++j])
 			{
@@ -68,6 +67,7 @@ void	ft_shell_down(t_minishell *shell)
 			break ;
 		}
 	}
+	free(aux);
 }
 
 static t_command	*ft_join(t_command *cmd)
@@ -102,17 +102,17 @@ static t_command	*ft_join(t_command *cmd)
 void	ft_check_line(t_command *cmd, t_minishell *shell)
 {
 	char	*line;
-	char	*cmd_line;
 	int		flag;
 
 	line = NULL;
-	cmd_line = shell->cmd_line;
-	if (cmd_line[0] == '\0')
+	flag = 0;
+	if (shell->cmd_line[0] == '\0')
 		return ;
-	flag = ft_flag_parse(cmd_line);
+	if (shell->cmd_line[0] == '<')
+		flag = 1;
 	signal(SIGINT, ft_intnl);
 	signal(SIGQUIT, ft_quit);
-	cmd = ft_take_cmd(&cmd, line, cmd_line);
+	cmd = ft_take_cmd(&cmd, line, shell->cmd_line);
 	if (!cmd)
 		return ;
 	ft_sust(&cmd, shell);
@@ -123,6 +123,6 @@ void	ft_check_line(t_command *cmd, t_minishell *shell)
 		return (ft_free_cmd(&cmd));
 	if (flag)
 		cmd->command = ft_swap(cmd->command, shell->inf);
-	return (ft_system(cmd, shell, ft_check_in(shell),
-			ft_check_out(shell)), ft_free_cmd(&cmd));
+	ft_system(cmd, shell, ft_check_in(shell), ft_check_out(shell));
+	return (ft_free_cmd(&cmd));
 }

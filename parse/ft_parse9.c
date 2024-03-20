@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse9.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 17:50:00 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/19 22:43:42 by david            ###   ########.fr       */
+/*   Updated: 2024/03/20 16:01:27 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ void	ft_unlink(char **cmd)
 
 	if (!cmd || !cmd[0])
 		return ;
-	i = -1;
+	i = 0;
 	while (cmd[++i])
 		unlink(cmd[i]);
+	ft_free_mtx(cmd);
 }
 
 char	**ft_take_one(char **cmd)
@@ -79,13 +80,12 @@ char	**ft_take_one(char **cmd)
 
 int	ft_checker(t_command *cmd)
 {
-	if (cmd->command[0] == '<' && cmd->command[1] == '<'
-		&& cmd->next->command[0] == '|')
+	if(cmd->command[0] == '<' && cmd->command[1] == '<' && cmd->next->command[0] == '|')
 		return (ft_printf("syntax error near unexpected token `|'\n"),
-			g_code_error = 258, 1);
-	else if (cmd->command[0] == '<' && cmd->next->command[0] == '|')
+		g_code_error = 258, 1);
+	else if(cmd->command[0] == '<' && cmd->next->command[0] == '|')
 		return (ft_printf("syntax error near unexpected token `newline'\n"),
-			g_code_error = 258, 1);
+		g_code_error = 258, 1);
 	if (ft_strchr(cmd->command, '<')
 		&& ft_strchr(cmd->next->command, '|')
 		&& ft_strchr(cmd->next->next->command, '>'))

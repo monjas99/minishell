@@ -6,7 +6,7 @@
 #    By: david <david@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 10:00:52 by dmonjas-          #+#    #+#              #
-#    Updated: 2024/03/19 22:29:00 by david            ###   ########.fr        #
+#    Updated: 2024/03/20 20:17:12 by david            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ FLAG	=	-lreadline -lhistory -L $(READLINE_DIR)/lib
 #FLAG	=	-lreadline -lhistory -L $(READLINE_DIR)/lib
 
 CC	=	gcc
-CFLAGS	=	-g -Wall -Werror -Wextra -I ./inc -I ./libft/inc/ -I $(READLINE_DIR)/include
+CFLAGS	=	-Wall -Werror -Wextra -I ./inc -I ./libft/inc/ -I $(READLINE_DIR)/include
 DEBUG	=	-g3 -fsanitize=address
 
 NAME	=	minishell

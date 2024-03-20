@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse8.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:24:53 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/19 22:42:16 by david            ###   ########.fr       */
+/*   Updated: 2024/03/20 13:16:15 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*ft_swap(char *cmd, char *inf)
 {
 	char	**tmp;
 	char	*command;
-	char	*aux;
 	int		i;
 
 	i = 1;
@@ -45,11 +44,9 @@ char	*ft_swap(char *cmd, char *inf)
 		return ("ERROR INF");
 	}
 	command = ft_strjoin(tmp[i], " ");
-	aux = command;
-	command = ft_strjoin(command, inf);
-	free(aux);
+	command = ft_strjoin_gnl(command, inf);
 	while (tmp[++i])
-		command = ft_strjoin(command, tmp[i]);
+		command = ft_strjoin_gnl(command, tmp[i]);
 	ft_free_mtx(tmp);
 	free(cmd);
 	return (command);
@@ -81,7 +78,6 @@ static char	*ft_spr(char **line, char *built)
 	ft_free_mtx(line);
 	return ("Error");
 }
-
 static char	*ft_built(char *cmd)
 {
 	if (ft_strnstr(cmd, "echo", ft_strlen(cmd))
