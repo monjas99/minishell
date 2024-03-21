@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse5.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 12:18:39 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/21 13:05:21 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:02:56 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,10 @@ void	ft_inout(t_command **cmd, t_minishell *shell)
 {
 	t_command	*aux;
 
-	*cmd = ft_check_first(*cmd, shell);
 	aux = *cmd;
+	if (g_code_error != 0)
+		return ;
+	*cmd = ft_check_first(*cmd, shell);
 	while (aux)
 	{
 		if (!aux->next)

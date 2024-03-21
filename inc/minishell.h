@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:44:42 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/21 13:05:52 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:53:40 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void		ft_error_fd(char *var, int fd);
 /* FT_PARSE_UTILS.C */
 int			ft_size_param(char *line);
 t_command	*ft_so_long(t_command *aux, t_minishell *shell);
+void		ft_g_code(char *str);
 
 /* ----- PIPE ----- */
 /* FT_PIPE.C */

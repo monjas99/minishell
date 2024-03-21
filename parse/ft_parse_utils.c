@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 12:57:47 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/21 13:01:27 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:52:46 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
+void	ft_g_code(char *str)
+{
+	if (str[0] == str[1] && str[1] == str[2])
+		g_code_error = 258;
+	if (str[0] == '|' && str[1] == '|')
+		g_code_error = 258;
+}
 int	ft_size_param(char *line)
 {
 	int	i;

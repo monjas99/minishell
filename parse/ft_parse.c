@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/20 16:37:16 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:05:05 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,10 @@ void	ft_check_line(t_command *cmd, t_minishell *shell)
 		return ;
 	ft_sust(&cmd, shell);
 	ft_inout(&cmd, shell);
+	if (g_code_error != 0)
+		return (ft_printf("Parse error\n"), ft_free_cmd(&cmd));
 	cmd = ft_join(cmd);
 	ft_cmdtake(&cmd);
-	if (g_code_error != 0)
-		return (ft_free_cmd(&cmd));
 	if (flag)
 		cmd->command = ft_swap(cmd->command, shell->inf);
 	ft_system(cmd, shell, ft_check_in(shell), ft_check_out(shell));
