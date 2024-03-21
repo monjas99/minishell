@@ -6,11 +6,12 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 12:57:47 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/21 18:52:46 by david            ###   ########.fr       */
+/*   Updated: 2024/03/21 19:08:56 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
 void	ft_g_code(char *str)
 {
 	if (str[0] == str[1] && str[1] == str[2])
