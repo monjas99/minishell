@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:31:09 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/20 19:43:11 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/03/21 13:09:43 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static void	ft_sig_disable(void)
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, ft_int);
 }
+
+//system("leaks -q minishell");
 
 int	main(int argc, char **argv, char **env)
 {

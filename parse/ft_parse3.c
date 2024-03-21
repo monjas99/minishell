@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:31:43 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/20 20:23:59 by david            ###   ########.fr       */
+/*   Updated: 2024/03/21 11:34:23 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static int	ft_pos(char *line, char **env)
 				j++;
 			str = ft_substr(env[i], 0, j);
 			if (!ft_strncmp(env[i], line, ft_strlen(str)))
-				return (i);
+				return (free (str), i);
 			else
-				return (-1);
+				return (free (str), -1);
 		}
 		i++;
 	}

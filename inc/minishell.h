@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:44:42 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/20 20:15:38 by david            ###   ########.fr       */
+/*   Updated: 2024/03/21 13:05:52 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ t_command	*ft_select_sust(t_command **cmd, t_command *aux,
 
 /* FT_PARSE5.C */
 void		ft_inout(t_command **cmd, t_minishell *shell);
+int			ft_inf(char *infile, char *command, t_minishell *shell);
 
 /* FT_PARSE6.C */
 int			ft_here(char *end, int file, t_minishell *shell);
@@ -154,6 +155,10 @@ void		ft_error_cmd(void);
 void		ft_error_arguments(void);
 void		ft_error_path(int i);
 void		ft_error_fd(char *var, int fd);
+
+/* FT_PARSE_UTILS.C */
+int			ft_size_param(char *line);
+t_command	*ft_so_long(t_command *aux, t_minishell *shell);
 
 /* ----- PIPE ----- */
 /* FT_PIPE.C */
@@ -187,7 +192,6 @@ void		ft_per_nb(char *s, int nb);
 
 /* FT_EXIT.C */
 void		ft_exit_code(t_command *cmd, t_minishell *shell);
-int			ft_size_param(char *line);
 
 /* FT_ERROR.C */
 void		ft_put_msg(char *var, char *s);
