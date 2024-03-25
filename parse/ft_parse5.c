@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse5.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 12:18:39 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/21 19:09:29 by david            ###   ########.fr       */
+/*   Updated: 2024/03/25 15:39:54 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void	ft_inout(t_command **cmd, t_minishell *shell)
 		else if (aux->next && (ft_strchr(aux->next->command, '>')
 				&& aux->next->dollar == 0))
 		{
+			if (!aux->next->next)
+				return (ft_er_out("syntax error near unexpected token `>'", 1));
 			shell->outfile = ft_open(aux->next->next->command,
 					aux->next->command, shell);
 			aux->next = ft_out_chech(aux->next);

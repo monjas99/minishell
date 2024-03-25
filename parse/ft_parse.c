@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/21 19:05:05 by david            ###   ########.fr       */
+/*   Updated: 2024/03/25 15:10:44 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	ft_check_line(t_command *cmd, t_minishell *shell)
 	ft_sust(&cmd, shell);
 	ft_inout(&cmd, shell);
 	if (g_code_error != 0)
-		return (ft_printf("Parse error\n"), ft_free_cmd(&cmd));
+		return (ft_free_cmd(&cmd));
 	cmd = ft_join(cmd);
 	ft_cmdtake(&cmd);
 	if (flag)
