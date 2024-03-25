@@ -6,7 +6,7 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 12:57:47 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/21 19:08:56 by david            ###   ########.fr       */
+/*   Updated: 2024/03/25 14:13:51 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_g_code(char *str)
 	if (str[0] == '|' && str[1] == '|')
 		g_code_error = 258;
 }
+
 int	ft_size_param(char *line)
 {
 	int	i;
