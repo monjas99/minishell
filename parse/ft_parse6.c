@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse6.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rodro <rodro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:46:02 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/21 12:51:50 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/25 19:51:57 by rodro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,17 @@ static void	ft_loop(int fd, char *line, char *end, t_minishell *shell)
 {
 	while (line)
 	{
+		line[ft_strlen(line)] = '\0';
 		line = ft_exp(line, shell);
 		if ((ft_strncmp(line, end, ft_strlen(end)) == 0)
 			&& (ft_strlen(line) == ft_strlen(end) + 1))
-			exit(EXIT_SUCCESS);
-		write(1, "> ", 2);
-		write(fd, line, ft_strlen(line));
+			break ;
+		ft_putstr_fd(line, fd);
+		ft_putstr_fd("\n", fd);
 		free(line);
-		line = get_next_line(STDIN_FILENO);
+		line = readline("> ");
 	}
+	free (line);
 }
 
 int	ft_here(char *end, int file, t_minishell *shell)
@@ -110,15 +112,19 @@ int	ft_here(char *end, int file, t_minishell *shell)
 	pid_t	pid;
 	char	*line;
 
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	pid = fork();
 	if (pid < 0)
 		ft_per_nb("fork", STDERR_FILENO);
 	if (pid == 0)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(STDIN_FILENO);
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_IGN);
+		line = readline("> ");
 		ft_loop(file, line, end, shell);
 		close(file);
+		exit(1);
 	}
 	else
 		wait(NULL);
