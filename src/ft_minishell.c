@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:31:09 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/27 11:32:59 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:02:57 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ int	main(int argc, char **argv, char **env)
 		add_history(shell.cmd_line);
 		ft_check_line(cmd, &shell);
 		ft_free_cmdline(&shell, &cmd);
-		system("leaks -q minishell");
 	}
 	return (0);
 }
