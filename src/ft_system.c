@@ -6,7 +6,7 @@
 /*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:44:31 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/21 12:56:18 by dmonjas-         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:00:09 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	ft_single_cmd(t_command *cmd,
 void	ft_system(t_command *cmd, t_minishell *shell, int fdin, int fdout)
 {
 	g_code_error = 0;
-	if (ft_lstsize_shell(cmd) == 1)
+	if (ft_lstsize_shell(cmd) == 1) 
 		ft_single_cmd(cmd, shell, fdin, fdout);
 	else if (ft_lstsize_shell(cmd) > 1)
 		ft_ord(cmd, shell, ft_check_in(shell), ft_check_out(shell));
