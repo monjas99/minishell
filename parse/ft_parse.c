@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rodro <rodro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:37 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/25 21:33:32 by david            ###   ########.fr       */
+/*   Updated: 2024/03/27 00:49:06 by rodro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static t_command	*ft_join(t_command *cmd, char *line)
 	while (aux)
 	{
 		if (aux->command[0] == '|' && !aux->next)
-			return (ft_er_out("`|'", 1), free(line), ft_free_cmd(&cmd), pipe);
+			return (ft_er_out("`|'", 1), free(line), cmd);
 		if (ft_strlen(aux->command) == 1 && aux->command[0] == '|')
 		{
 			ft_lstadd_back_shell(&pipe, ft_lstnew_shell(line));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rodro <rodro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:31:09 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/25 19:57:43 by rodro            ###   ########.fr       */
+/*   Updated: 2024/03/27 10:31:45 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ static void	ft_sig_disable(void)
 	signal(SIGINT, ft_int);
 }
 
-//system("leaks -q minishell");
+/* void ft_leaks(void)
+{
+	system("leaks -q minishell");
+} */
 
 int	main(int argc, char **argv, char **env)
 {
@@ -105,6 +108,7 @@ int	main(int argc, char **argv, char **env)
 		add_history(shell.cmd_line);
 		ft_check_line(cmd, &shell);
 		ft_free_cmdline(&shell, &cmd);
+		system("leaks -q minishell");
 	}
 	return (0);
 }
