@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rodro <rodro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 12:57:47 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/27 00:54:10 by rodro            ###   ########.fr       */
+/*   Updated: 2024/04/02 16:10:02 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,33 @@ t_command	*ft_so_long(t_command *aux, t_minishell *shell)
 	shell->inf = ft_strdup(aux->next->next->command);
 	shell->infile = ft_inf(aux->next->next->command, aux->next->command, shell);
 	return (ft_del_node(aux->next));
+}
+
+char	**ft_check_quotes(t_command *cmd)
+{
+	char	**tmp;
+	int		i;
+	int		j;
+	int		k;
+
+	if (!ft_check_space(cmd->command))
+	{
+		tmp = NULL;
+		tmp = malloc(sizeof(char *) * 2);
+		tmp[1] = NULL;
+		i = 0;
+		while (cmd->command[i])
+			i++;
+		tmp[0] = malloc(sizeof(char) * (i + 1));
+		j = -1;
+		k = 0;
+		while (++j < i)
+		{
+			tmp[0][j] = cmd->command[k];
+			k++;
+		}
+		tmp[0][j] = '\0';
+		return (tmp);
+	}
+	return (ft_split(cmd->command, ' '));
 }

@@ -6,7 +6,7 @@
 /*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:44:31 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/03/27 12:03:31 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:31:52 by rofuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,13 @@ static void	ft_single_cmd(t_command *cmd,
 		shell->heredoc = 0;
 	}
 	else if (ft_select(cmd, shell, fdout) == 1)
-		ft_exec(ft_split(cmd->command, ' '), shell, fdin, fdout);
+		ft_exec(ft_check_quotes(cmd), shell, fdin, fdout);
 }
 
 void	ft_system(t_command *cmd, t_minishell *shell, int fdin, int fdout)
 {
+	if (!cmd->command)
+		return ;
 	g_code_error = 0;
 	if (ft_lstsize_shell(cmd) == 1)
 		ft_single_cmd(cmd, shell, fdin, fdout);
