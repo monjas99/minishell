@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse8.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:24:53 by rofuente          #+#    #+#             */
-/*   Updated: 2024/03/27 15:30:21 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:59:50 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,13 @@ static char	*ft_spr(char **line, char *built)
 	{
 		if (ft_strncmp(line[i], built, ft_strlen(line[i])) == 0)
 		{
-			word = malloc(sizeof(char) * ft_strlen(line[i]));
-			while (line[i][j])
+			word = malloc(sizeof(char) * ft_strlen(built) + 1);
+			while (built[j])
 			{
 				word[j] = line[i][j];
 				j++;
 			}
+			word[j] = '\0';
 			ft_free_mtx(line);
 			return (word);
 		}
