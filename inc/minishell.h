@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofuente <rofuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmonjas- <dmonjas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:44:42 by dmonjas-          #+#    #+#             */
-/*   Updated: 2024/04/02 16:05:10 by rofuente         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:26:41 by dmonjas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define RESET   "\x1b[0m"
 
 /*-----VARIABLE GLOBAL-----*/
-int	g_code_error;
+extern int	g_code_error;
 
 /*-----ESTRUCTURAS-----*/
 
